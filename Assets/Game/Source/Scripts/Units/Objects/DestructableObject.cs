@@ -51,7 +51,7 @@ public class DestructableObject : Unit, IPushable
         base.Push(direction, distance);
     }
 
-    private void OnDeath()
+    public void OnDeath()
     {
         if (m_createHazard)
             CreateHazard();
