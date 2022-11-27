@@ -4804,6 +4804,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2740926079272813167, guid: 6cbeb397f3de7ae41823ae97fdb36e9d, type: 3}
+      propertyPath: m_timer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2740926079272813167, guid: 6cbeb397f3de7ae41823ae97fdb36e9d, type: 3}
+      propertyPath: m_dealDamage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2740926079272813167, guid: 6cbeb397f3de7ae41823ae97fdb36e9d, type: 3}
+      propertyPath: m_createHazard
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2740926079272813167, guid: 6cbeb397f3de7ae41823ae97fdb36e9d, type: 3}
+      propertyPath: m_damageAmount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2740926079272813167, guid: 6cbeb397f3de7ae41823ae97fdb36e9d, type: 3}
+      propertyPath: m_damageRadius
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2740926079272813167, guid: 6cbeb397f3de7ae41823ae97fdb36e9d, type: 3}
+      propertyPath: m_hazardRadius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2740926079272813167, guid: 6cbeb397f3de7ae41823ae97fdb36e9d, type: 3}
+      propertyPath: m_destroyOnTimer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 6cbeb397f3de7ae41823ae97fdb36e9d, type: 3}
@@ -6315,6 +6343,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 2035028349}
     m_Modifications:
+    - target: {fileID: 6878178865126846097, guid: 82230f3b4aa375f43b8f4b4176127292, type: 3}
+      propertyPath: m_destroyDelay
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6878178865126846110, guid: 82230f3b4aa375f43b8f4b4176127292, type: 3}
       propertyPath: m_RootOrder
       value: -1

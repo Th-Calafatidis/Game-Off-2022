@@ -16,6 +16,7 @@ public abstract class Enemy : Entity, IPushable
     [Header("Generic")]
     [SerializeField] private string m_displayName;
     [SerializeField] private int m_actionPriority;
+    [SerializeField] private float m_destroyDelay;
 
     [Header("Lines")]
     [SerializeField] private List<ActionLine> m_lines;
@@ -140,7 +141,21 @@ public abstract class Enemy : Entity, IPushable
         // because it is handled when removing action.
         ClearAction();
 
-        //RemoveUnit();
+        StartCoroutine(DestroyUnit());
+    }
+
+    private IEnumerator DestroyUnit()
+    {
+        float time = 0f;
+
+        while (time < m_destroyDelay)
+        {
+            time += Time.deltaTime;
+
+            yield return 0;
+        }
+
+        RemoveUnit();
     }
 
     #region Player

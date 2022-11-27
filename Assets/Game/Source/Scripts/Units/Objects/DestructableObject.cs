@@ -2,17 +2,24 @@
 // -----------------------
 // Creation date: 14/11/2022
 // Author: Alex
-// Edited by Theodore on 27/11/2022
 // Description: This is an object that can be pushed and damaged, as well as being destroyed. Has the option to create hazards.
+// 
+// Edited: Theodore on 27/11/2022
+// Added: DestroyOnTimer, DealDamage, TimerCountdown, edited CreateHazards, configured the script to function with the new features.
 // -----------------------
 // ------------------- */
 
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class DestructableObject : Unit, IPushable
 {
+    [Header("Destroy On Timer")]
+    [SerializeField] private bool m_destroyOnTimer;
+    [SerializeField] private int m_timer;
+
     [Header("Health")]
     [SerializeField] private bool m_damagable;
     [SerializeField] private int m_maxHealth;
@@ -21,6 +28,7 @@ public class DestructableObject : Unit, IPushable
     [Header("Damage")]
     [SerializeField] private bool m_dealDamage;
     [SerializeField] private int m_damageAmount;
+    [SerializeField] private int m_damageRadius;
 
     [Header("Pushing")]
     [SerializeField] private bool m_pushable;
@@ -28,6 +36,7 @@ public class DestructableObject : Unit, IPushable
     [Header("Hazards")]
     [SerializeField] private bool m_createHazard;
     [SerializeField] private Hazard m_hazardType;
+    [SerializeField] private int m_hazardRadius = 1;
     [SerializeField] private int m_hazardDuration;
 
     override public void Awake()
@@ -36,8 +45,17 @@ public class DestructableObject : Unit, IPushable
 
         // Initialize health
         m_health = new Health(m_maxHealth);
-        m_health.OnHealthZero += OnDeath;
+        m_health.OnHealthZero += OnDeath;        
     }
+
+    private void Start()
+    {
+        if (!m_destroyOnTimer)
+            return;
+
+        BattleManager.Instance.OnRoundStart += TimerCopuntdown;
+    }
+
 
     public override void TakeDamage(int damage)
     {
@@ -62,9 +80,9 @@ public class DestructableObject : Unit, IPushable
             CreateHazard();
 
         if (m_dealDamage)
+            DealDamage();
 
-
-        RemoveUnit();
+            RemoveUnit();
     }
 
     private void CreateHazard()
@@ -72,13 +90,37 @@ public class DestructableObject : Unit, IPushable
         EnvironmentHazard.CreateHazard(m_hazardType, m_hazardDuration, GridPosition);
 
         // Theo: Added this code here to create a hazard in all adjacent tiles too.
-        List<Vector2Int> surroundingTiles = Grid.Instance.GetSurroundingTiles(GridPosition);
+        List<Vector2Int> surroundingTiles = Grid.Instance.GetSurroundingTiles(GridPosition, m_hazardRadius);
 
         foreach (Vector2Int tile in surroundingTiles)
         {
             EnvironmentHazard.CreateHazard(m_hazardType, m_hazardDuration, tile);
         }
+    }
 
-        
+    private void DealDamage()
+    {
+        List<Vector2Int> targetTiles = Grid.Instance.GetSurroundingTiles(this.GridPosition, m_damageRadius);
+
+        foreach(Vector2Int tile in targetTiles)
+        {
+            Unit target = Grid.Instance.GetUnitAt(tile);
+
+            if (target != null)
+            {
+                target.TakeDamage(m_damageAmount);
+            }
+            
+        }
+    }
+
+    private void TimerCopuntdown()
+    {
+        m_timer--;
+
+        if(m_timer <= 0)
+        {
+            OnDeath();
+        }
     }
 }

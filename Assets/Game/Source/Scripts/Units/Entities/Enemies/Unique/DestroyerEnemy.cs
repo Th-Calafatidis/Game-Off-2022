@@ -30,6 +30,11 @@ public class DestroyerEnemy : Enemy
     public Hazard m_grenadeHazardType;
     public int m_grenadeHazardDuration;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip m_ironFistSound;
+    [SerializeField] private AudioClip m_chargeSound;
+    [SerializeField] private AudioClip m_toxicBlast;
+
     public override void DetermineAction()
     {
         ClearHighlights();
