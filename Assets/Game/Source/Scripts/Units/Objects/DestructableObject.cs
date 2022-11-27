@@ -5,7 +5,7 @@
 // Description: This is an object that can be pushed and damaged, as well as being destroyed. Has the option to create hazards.
 // 
 // Edited: Theodore on 27/11/2022
-// Added: DestroyOnTimer, DealDamage, TimerCountdown, edited CreateHazards, configured the script to function with the new features.
+// Added: DestroyOnTimer, DealDamage, TimerCountdown, CreateHazards, configured the script to function with the new features.
 // -----------------------
 // ------------------- */
 
@@ -89,11 +89,15 @@ public class DestructableObject : Unit, IPushable
     {
         EnvironmentHazard.CreateHazard(m_hazardType, m_hazardDuration, GridPosition);
 
-        // Theo: Added this code here to create a hazard in all adjacent tiles too.
         List<Vector2Int> surroundingTiles = Grid.Instance.GetSurroundingTiles(GridPosition, m_hazardRadius);
 
         foreach (Vector2Int tile in surroundingTiles)
         {
+            var node = Grid.Instance.GetNodeAt(tile.x, tile.y);
+
+            if (node.IsObstructed)
+                return;
+
             EnvironmentHazard.CreateHazard(m_hazardType, m_hazardDuration, tile);
         }
     }
