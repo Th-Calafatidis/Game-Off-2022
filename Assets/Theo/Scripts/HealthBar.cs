@@ -9,28 +9,17 @@ public class HealthBar : MonoBehaviour
 
     private Transform m_containerTransform;
 
-    private Player m_player;
-
-    [SerializeField] private GameObject m_cell; // Could Load this via Resources instead
+    [SerializeField] private GameObject m_cell;
 
     private void Start()
     {
-        m_player = transform.parent.gameObject.GetComponent<Player>(); // should be Entity here
-
-        m_health = m_player.Health; // No spedific need to have this cached.
+        m_health = transform.parent.gameObject.GetComponent<Entity>().Health;
 
         m_containerTransform = GetComponentInChildren<HorizontalLayoutGroup>().transform;
 
         CreateHealthBar();
 
         m_health.OnHealthChanged += UpdateHealthBar;
-    }
-
-    private void Update()
-    {
-
-        transform.LookAt(Camera.main.transform);
-
     }
 
     private void UpdateHealthBar()

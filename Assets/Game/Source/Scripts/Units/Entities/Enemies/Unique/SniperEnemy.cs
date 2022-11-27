@@ -2,6 +2,7 @@
 // -----------------------
 // Creation date: 15/11/2022
 // Author: Alex
+// Edited by Theodore on 24/11/2022
 // Description: This enemy will try to snipe the player when in line of sight. This is different from other enemies,
 //              as the player
 // -----------------------
@@ -49,7 +50,8 @@ public class SniperEnemy : Enemy
 
     public override void DetermineMove()
     {
-
+        // Rotate towards the player's position
+        transform.LookAt(GetPlayer().transform);
     }
 
     public override void TakeDamage(int damage)

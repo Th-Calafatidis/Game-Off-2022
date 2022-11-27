@@ -2,6 +2,7 @@
 // -----------------------
 // Creation date: 14/11/2022
 // Author: Alex
+// Edited by Theodore on 27/11/2022
 // Description: This is an object that can be pushed and damaged, as well as being destroyed. Has the option to create hazards.
 // -----------------------
 // ------------------- */
@@ -16,6 +17,10 @@ public class DestructableObject : Unit, IPushable
     [SerializeField] private bool m_damagable;
     [SerializeField] private int m_maxHealth;
     private Health m_health;
+
+    [Header("Damage")]
+    [SerializeField] private bool m_dealDamage;
+    [SerializeField] private int m_damageAmount;
 
     [Header("Pushing")]
     [SerializeField] private bool m_pushable;
@@ -55,6 +60,10 @@ public class DestructableObject : Unit, IPushable
     {
         if (m_createHazard)
             CreateHazard();
+
+        if (m_dealDamage)
+
+
         RemoveUnit();
     }
 

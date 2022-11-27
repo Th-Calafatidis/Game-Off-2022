@@ -2,6 +2,7 @@
 // -----------------------
 // Creation date: 04/11/2022
 // Author: Alex
+// Edited by Theodore on 26//11/2022
 // Description: This is the main class for the player entity. It is responsible for setting up the player's health and other
 //              things.
 // -----------------------
@@ -42,6 +43,11 @@ public class Player : Entity, IDamagable
     [SerializeField] private int m_blinkDamage;
     [SerializeField] private float m_blinkWindupDelay;
     [SerializeField] private AudioClip m_blinkAudio;
+
+    [Header("Line Renderer")]
+    [SerializeField] private float m_width = 0.15f;
+    [SerializeField] private Color m_validColor;
+    [SerializeField] private Color m_invalidColor;
 
     // AP
     private ActionPoints m_actionPoints;
@@ -153,8 +159,8 @@ public class Player : Entity, IDamagable
                 }
 
                 // Since this is valid, we make the line renderer green
-                lineRenderer.startColor = Color.green;
-                lineRenderer.endColor = Color.green;
+                lineRenderer.startColor = m_validColor;
+                lineRenderer.endColor = m_validColor;
                 isValid = true;
 
                 distance = currentPath.Count;
@@ -170,8 +176,8 @@ public class Player : Entity, IDamagable
             // No valid path found.
             else
             {
-                lineRenderer.startColor = Color.red;
-                lineRenderer.endColor = Color.red;
+                lineRenderer.startColor = m_invalidColor;
+                lineRenderer.endColor = m_invalidColor;
                 isValid = false;
                 m_preview.Hide();
             }
@@ -218,8 +224,8 @@ public class Player : Entity, IDamagable
         lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
         lineRenderer.startColor = Color.white;
         lineRenderer.endColor = Color.white;
-        lineRenderer.startWidth = 0.1f;
-        lineRenderer.endWidth = 0.1f;
+        lineRenderer.startWidth = 0.2f;
+        lineRenderer.endWidth = 0.2f;
         lineRenderer.positionCount = 0;
 
         return lineRenderer;

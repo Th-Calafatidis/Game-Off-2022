@@ -312,7 +312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_target: {fileID: 0}
-  m_interaction: 2
+  m_interaction: 0
 --- !u!54 &161023482
 Rigidbody:
   m_ObjectHideFlags: 0
