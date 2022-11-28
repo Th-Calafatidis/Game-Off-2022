@@ -49,6 +49,9 @@ public class Player : Entity, IDamagable
     [SerializeField] private Color m_validColor;
     [SerializeField] private Color m_invalidColor;
 
+    // Sniper Target Icon
+    public GameObject LockIcon;
+
     // AP
     private ActionPoints m_actionPoints;
 
@@ -70,6 +73,8 @@ public class Player : Entity, IDamagable
     {
         get { return m_movementAmount; }
     }
+
+    
 
     public override void Awake()
     {
@@ -130,6 +135,8 @@ public class Player : Entity, IDamagable
     /// <returns></returns>
     private IEnumerator MoveSelection()
     {
+        
+
         LineRenderer lineRenderer = CreateLineRenderer();
 
         Vector2Int playerPosition = Grid.Instance.GetGridPosition(transform.position);
@@ -139,6 +146,7 @@ public class Player : Entity, IDamagable
 
         while (!Input.GetKeyDown(KeyCode.Mouse0) && !Input.GetKeyDown(KeyCode.Escape))
         {
+            
             // First get the grid position that mouse is currently looking at.
             Vector2Int mousePosition = GetCursorGridPosition();
 

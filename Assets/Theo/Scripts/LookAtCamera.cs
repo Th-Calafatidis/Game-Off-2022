@@ -7,7 +7,7 @@ public class LookAtCamera : MonoBehaviour
 {
     private Camera m_cam;
 
-    private void OnEnable()
+    private void Awake()
     {
         m_cam = Camera.main;
     }

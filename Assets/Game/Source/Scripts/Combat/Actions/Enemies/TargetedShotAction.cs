@@ -48,7 +48,9 @@ public class TargetedShotAction : ICombatAction
                 break;
             }
         }
-        
+
+        m_sender.GetComponent<Enemy>().Animator.SetBool("isAiming", false);
+        m_sender.GetComponent<Enemy>().Animator.SetTrigger("isShooting");
 
         yield return 0;
     }

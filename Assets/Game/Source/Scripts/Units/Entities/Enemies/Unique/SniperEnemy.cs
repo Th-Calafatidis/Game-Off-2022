@@ -11,6 +11,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.LowLevel;
 
 public class SniperEnemy : Enemy
 {
@@ -25,8 +26,13 @@ public class SniperEnemy : Enemy
 
     public int MaxRange { get { return m_maxRange; } }
 
+    private bool m_actionLocked;
+    private GameObject playerLock;
+
     public override void DetermineAction()
     {
+        m_actionLocked = false;
+
         // Ignore unless within range
         if (Grid.Instance.GetDistanceBetweenUnits(this, GetPlayer()) > m_maxRange)
         {
@@ -43,6 +49,9 @@ public class SniperEnemy : Enemy
         // Create the action
         ICombatAction targetedShot = new TargetedShotAction(this, m_damage, () => { PlaySound(m_shootSound); });
         SetAction(targetedShot);
+
+        m_actionLocked = true;
+
         SetLine("snipe", m_damage);
         Animator.SetBool("isAiming", true);
         PlaySound(m_lockOnSound);
@@ -67,4 +76,44 @@ public class SniperEnemy : Enemy
 
         Animator.SetTrigger("isDead");
     }
+
+
+    //private void Update()
+    //{
+    //    playerLock = GetPlayer().GetComponent<Player>().LockIcon;
+
+    //    ShowTargetIcon();
+    //}
+
+    //private void ShowTargetIcon()
+    //{
+    //    if (!m_actionLocked)
+    //    {
+    //        playerLock.SetActive(false);
+    //        return;
+    //    }
+            
+
+    //    List<Vector2Int> tilesToPlayer = Grid.Instance.BresenhamLine(this.GridPosition.x, this.GridPosition.y,
+    //                                                                 GetPlayer().GridPosition.x, GetPlayer().GridPosition.y);
+
+    //    for (int i = 1; i < tilesToPlayer.Count; i++)
+    //    {
+
+    //        // Since a unit counts as occupying a tile, we have to check for that manually first.
+    //        Unit hitUnit = Grid.Instance.GetUnitAt(tilesToPlayer[i]);
+    //        if (hitUnit != null)
+    //        {
+    //            if (hitUnit.CompareTag("Player"))
+    //            {
+    //                playerLock = hitUnit.GetComponent<Player>().LockIcon;
+    //                playerLock.SetActive(true);
+    //            }
+    //        }
+    //        else
+    //        {
+    //                playerLock.SetActive(false);
+    //        }
+    //    }
+    //}
 }
