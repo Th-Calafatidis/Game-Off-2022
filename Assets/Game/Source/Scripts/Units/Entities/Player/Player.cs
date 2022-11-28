@@ -224,8 +224,8 @@ public class Player : Entity, IDamagable
         lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
         lineRenderer.startColor = Color.white;
         lineRenderer.endColor = Color.white;
-        lineRenderer.startWidth = 0.2f;
-        lineRenderer.endWidth = 0.2f;
+        lineRenderer.startWidth = m_width;
+        lineRenderer.endWidth = m_width;
         lineRenderer.positionCount = 0;
 
         return lineRenderer;

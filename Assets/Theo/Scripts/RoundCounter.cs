@@ -6,6 +6,8 @@ public class RoundCounter : MonoBehaviour
 {
     public int CurrentRound { get; private set; }
 
+    [SerializeField] private int m_levelRoundTarget;
+
     private void Start()
     {
         CurrentRound = 1;
