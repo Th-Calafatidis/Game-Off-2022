@@ -4,6 +4,8 @@
 // Author: Alex
 // Description: This is the actual class for containing information about the grid, such as tiles and units.
 //              Also responsible for navigating units using pathfinding.
+// Edited: Theodore on 27/11/2022
+// Added: Changed the UnitRegistry to a public getter property so i can access it via UIManager script.
 // -----------------------
 // ------------------- */
 
@@ -27,7 +29,7 @@ public class Grid : MonoBehaviour
     private Pathfinder m_pathfinder;
 
     // To track where units are on the grid, we store them along with their positions in a dictionary.
-    private Dictionary<Unit, Vector2Int> m_unitRegistry;
+    public Dictionary<Unit, Vector2Int> UnitRegistry { get; private set; }
 
     // We will also have to track all hazards on the grid for easy application
     private Dictionary<EnvironmentHazard, Vector2Int> m_hazardRegistry;
@@ -50,7 +52,7 @@ public class Grid : MonoBehaviour
         m_pathfinder = new Pathfinder(m_navmesh);
 
         // Registy
-        m_unitRegistry = new Dictionary<Unit, Vector2Int>();
+        UnitRegistry = new Dictionary<Unit, Vector2Int>();
         m_hazardRegistry = new Dictionary<EnvironmentHazard, Vector2Int>();
     }
 
@@ -575,7 +577,7 @@ public class Grid : MonoBehaviour
     public void RegisterUnit(Unit unit)
     {
         Vector2Int position = GetGridPosition(unit.transform.position);
-        m_unitRegistry.Add(unit, position);
+        UnitRegistry.Add(unit, position);
     }
 
     /// <summary>
@@ -584,7 +586,7 @@ public class Grid : MonoBehaviour
     /// <param name="unit"></param>
     public void UnregisterUnit(Unit unit)
     {
-        m_unitRegistry.Remove(unit);
+        UnitRegistry.Remove(unit);
     }
 
     /// <summary>
@@ -595,7 +597,7 @@ public class Grid : MonoBehaviour
     public void UpdateUnit(Unit unit)
     {
         Vector2Int position = GetGridPosition(unit.transform.position);
-        m_unitRegistry[unit] = position;
+        UnitRegistry[unit] = position;
 
         // Since a unit has moved, we need to rebake the navmesh.
         m_navmesh.Bake();
@@ -633,7 +635,7 @@ public class Grid : MonoBehaviour
     public Unit GetUnitAt(Vector2Int position)
     {
         // Look for unit in registry and return it
-        foreach (KeyValuePair<Unit, Vector2Int> unit in m_unitRegistry)
+        foreach (KeyValuePair<Unit, Vector2Int> unit in UnitRegistry)
         {
             if (unit.Value == position)
                 return unit.Key;
@@ -650,7 +652,7 @@ public class Grid : MonoBehaviour
     public List<Unit> GetUnitsOfType<T>() where T : Unit
     {
         List<Unit> units = new List<Unit>();
-        foreach (KeyValuePair<Unit, Vector2Int> unit in m_unitRegistry)
+        foreach (KeyValuePair<Unit, Vector2Int> unit in UnitRegistry)
         {
             if (unit.Key is T)
                 units.Add(unit.Key);

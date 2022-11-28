@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class RoundCounter : MonoBehaviour
 {
-    public int RoundsPassed { get; private set; }
+    public int CurrentRound { get; private set; }
 
-    private void Awake()
+    private void Start()
     {
+        CurrentRound = 1;
+
         BattleManager.Instance.OnRoundEnd += CountRound;
+
     }
 
     private void CountRound()
     {
-        RoundsPassed ++ ;
+        CurrentRound ++;
     }
 }

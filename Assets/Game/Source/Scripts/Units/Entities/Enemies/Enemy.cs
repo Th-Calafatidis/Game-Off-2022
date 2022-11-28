@@ -4,6 +4,8 @@
 // Author: Alex
 // Description: The base for any enemy in the game. For simplicty sake since we don't have time for very complicated
 //              enemy setup, each enemy will have it's own class that inherits from this one.
+// Edited: Theodore on 27/11/2022
+// Changes: Changed Highligts list into a public getter to be able to access those via UIManager script.
 // -----------------------
 // ------------------- */
 
@@ -21,7 +23,7 @@ public abstract class Enemy : Entity, IPushable
     [Header("Lines")]
     [SerializeField] private List<ActionLine> m_lines;
     
-    private List<GameObject> m_highlights;
+    public List<GameObject> Highlights { get; private set; }
 
     // Track the intended action, for automatic removal upon death
     private ICombatAction m_intendedAction;
@@ -86,13 +88,13 @@ public abstract class Enemy : Entity, IPushable
         m_display.SetEnemy(this);
         m_display.Show();
 
-        if (m_highlights != null)
+        if (Highlights != null)
             ShowHighlights();
     }
 
     private void OnMouseExit()
     {
-        if (m_highlights != null)
+        if (Highlights != null)
             HideHighlights();
 
         // It is impossible to trigger this event without first calling OnMouseEnter, so we
@@ -210,13 +212,13 @@ public abstract class Enemy : Entity, IPushable
     /// <returns></returns>
     public void CreateHighlight(List<Vector2Int> positions, Color color)
     {
-        if (m_highlights == null) m_highlights = new List<GameObject>();
+        if (Highlights == null) Highlights = new List<GameObject>();
 
         foreach (Vector2Int position in positions)
         {
             GameObject highlight = Grid.Instance.HighlightTile(position, color);
             highlight.SetActive(false);
-            m_highlights.Add(highlight);
+            Highlights.Add(highlight);
         }
     }
 
@@ -227,9 +229,9 @@ public abstract class Enemy : Entity, IPushable
     /// <returns></returns>
     public void CreateHighlight(Vector2Int position, Color color)
     {
-        if (m_highlights == null) m_highlights = new List<GameObject>();
+        if (Highlights == null) Highlights = new List<GameObject>();
         GameObject highlight = Grid.Instance.HighlightTile(position, color);
-        m_highlights.Add(highlight);
+        Highlights.Add(highlight);
     }
 
     /// <summary>
@@ -237,21 +239,21 @@ public abstract class Enemy : Entity, IPushable
     /// </summary>
     public void ClearHighlights()
     {
-        if (m_highlights == null) return;
+        if (Highlights == null) return;
 
-        foreach (GameObject highlight in m_highlights)
+        foreach (GameObject highlight in Highlights)
         {
             Destroy(highlight);
         }
-        m_highlights = null;
+        Highlights = null;
     }
 
     /// <summary>
     /// Disables all the highlight objects
     /// </summary>
-    private void HideHighlights()
+    public void HideHighlights()
     {
-        foreach (GameObject highlight in m_highlights)
+        foreach (GameObject highlight in Highlights)
         {
             highlight.SetActive(false);
         }
@@ -260,9 +262,9 @@ public abstract class Enemy : Entity, IPushable
     /// <summary>
     /// Enables all the highlight objects
     /// </summary>
-    private void ShowHighlights()
+    public void ShowHighlights()
     {
-        foreach (GameObject highlight in m_highlights)
+        foreach (GameObject highlight in Highlights)
         {
             highlight.SetActive(true);
         }

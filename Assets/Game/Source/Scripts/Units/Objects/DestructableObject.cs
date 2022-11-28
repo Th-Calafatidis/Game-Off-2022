@@ -82,7 +82,9 @@ public class DestructableObject : Unit, IPushable
         if (m_dealDamage)
             DealDamage();
 
-            RemoveUnit();
+        RemoveUnit();
+
+        BattleManager.Instance.OnRoundStart -= TimerCopuntdown;
     }
 
     private void CreateHazard()
