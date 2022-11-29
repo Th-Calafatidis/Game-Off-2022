@@ -16,7 +16,7 @@ public class EnemyDisplay : MonoBehaviour
 {
     [SerializeField] private TMP_Text m_actionLineText;
     [SerializeField] private TMP_Text m_healthText;
-    [SerializeField] private TMP_Text m_shieldText;
+    //[SerializeField] private TMP_Text m_shieldText;
 
     private Enemy m_enemy;
 
@@ -80,7 +80,7 @@ public class EnemyDisplay : MonoBehaviour
                 m_actionLineText.text = "";
             
             m_healthText.text = "<color=red>" + m_enemy.Health.CurrentHealth + "/" + m_enemy.Health.MaxHealth;
-            m_shieldText.text = "<color=blue>" + m_enemy.Health.Shield.ToString();
+            //m_shieldText.text = "<color=blue>" + m_enemy.Health.Shield.ToString();
         }
     }
 }
