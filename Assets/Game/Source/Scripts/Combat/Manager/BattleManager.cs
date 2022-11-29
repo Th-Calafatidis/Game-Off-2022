@@ -170,14 +170,14 @@ public class BattleManager : MonoBehaviour
     {
         m_announcement.Announce("Player turn", 3);
 
-        // Call event to signal that the player turn has started.
-        OnPlayerTurnStart?.Invoke();
-
         // Start of turn effects.
         m_player.OnTurnStart();
 
-        m_player.RestoreAP();      
-        m_state = BattleState.Player;        
+        m_player.RestoreAP();
+        m_state = BattleState.Player;
+
+        // Call event to signal that the player turn has started.
+        OnPlayerTurnStart?.Invoke();
     }
 
     /// <summary>
