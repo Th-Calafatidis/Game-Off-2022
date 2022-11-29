@@ -1541,7 +1541,7 @@ Transform:
   - {fileID: 3948584428447307674}
   - {fileID: 4154191246923792862}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &3948584427675343000
 CapsuleCollider:
@@ -1575,6 +1575,7 @@ MonoBehaviour:
   m_physicalMovementSpeed: 0
   m_displayName: 
   m_actionPriority: 0
+  m_destroyDelay: 0
   m_lines:
   - Tag: snipe
     Line: During my time working as a government assassin, I was taught how to snipe
@@ -1599,7 +1600,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

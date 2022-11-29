@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Game/Game/Scenes/Main Menu/Main Menu.unity
     guid: 84c270a2952951544bbd39559fbfd401
   - enabled: 1
-    path: Assets/Game/Game/Scenes/Testing Environment/Testing Environment.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Alex/plzworkscene.unity
+    guid: 477b4e592e726094e819a50f8281cfac
   m_configObjects: {}

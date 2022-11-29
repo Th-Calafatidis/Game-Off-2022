@@ -2639,7 +2639,7 @@ MonoBehaviour:
   m_physicalMovementSpeed: 5
   m_displayName: 
   m_actionPriority: 1
-  m_destroyDelay: 0
+  m_destroyDelay: 2
   m_lines:
   - Tag: charge
     Line: Once I start charging, nothing will be able to stop me. Anyone caught in
@@ -2661,9 +2661,10 @@ MonoBehaviour:
   m_grenadeRadius: 1
   m_grenadeHazardType: 1
   m_grenadeHazardDuration: 2
-  m_ironFistSound: {fileID: 0}
+  m_ironFistSound: {fileID: 8300000, guid: be72bcb511d8c5049a6241d3cfaf37d4, type: 3}
   m_chargeSound: {fileID: 0}
-  m_toxicBlast: {fileID: 0}
+  m_toxicBlastLaunchSound: {fileID: 8300000, guid: d1fa9a28d149fad47adc6d6367080236, type: 3}
+  m_toxicBlastExplosionSound: {fileID: 8300000, guid: 7f466a08733f44344856b0619489994f, type: 3}
 --- !u!65 &506420314
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -407,7 +407,7 @@ public class Player : Entity, IDamagable
     /// <returns></returns>
     private IEnumerator BlinkSelection(Dictionary<Direction, Vector2Int> blinkPositions)
     {
-        Debug.Log(blinkPositions.Values.Count);
+        //Debug.Log(blinkPositions.Values.Count);
 
         // Start by creating green highlights at all valid blink positions.
         List<GameObject> highlights = new List<GameObject>();        
