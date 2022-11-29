@@ -32,6 +32,10 @@ public class BattleManager : MonoBehaviour
     // For displaying updates about the battle, we use the announcement text
     private AnnouncementText m_announcement;
 
+    private AudioSource m_audioSource;
+    [SerializeField] AudioClip m_winSound;
+    [SerializeField] AudioClip m_lossSound;
+
     // Events
     public Action OnBattleStart;
     public Action OnRoundStart;
@@ -57,10 +61,15 @@ public class BattleManager : MonoBehaviour
 
     private void Start()
     {
+        m_audioSource = Camera.main.GetComponent<AudioSource>();
+
+        AbilityButtonManager.Instance.OnEndTurnButtonPress += EndPlayerTurn;
+
         // Battle should start after a small delay. This delay is here to ensure that all scripts
         // have finished initalizing.
         //this.Invoke(StartBattle, 0.05f);
         StartCoroutine(StartBattle());
+
     }
 
     #region Combat
@@ -118,13 +127,26 @@ public class BattleManager : MonoBehaviour
         // Call event then start new round.
         OnRoundEnd?.Invoke();
 
+        // NOTE: This should be placed elsewhere!!!
+
         // Here we check for the win condition, which should just be if there are no more enemies.
         // Might add some more logic here later.
         if (GetEnemyCount() == 0)
         {
             // TEMPORARY: Load next scene. this should be changed later
-            m_announcement.Announce("Level complete", 3f);
-            this.Invoke(Utility.LoadNextScene, 3f);
+            m_announcement.Announce("Level Complete", 4f);
+            m_audioSource.Stop();
+            m_audioSource.PlayOneShot(m_winSound);
+            this.Invoke(Utility.LoadNextScene, 4f);
+        }
+
+        else if(m_player.Health.CurrentHealth <= 0)
+        {
+            m_announcement.Announce("You Died", 4f);
+            m_audioSource.Stop();
+            m_audioSource.PlayOneShot(m_lossSound);
+            this.Invoke(Utility.RestartScene, 4f);
+            
         }
 
         else

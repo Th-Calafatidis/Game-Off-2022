@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class AbilityDescriptionManager : MonoBehaviour
 {
-    [SerializeField] private Player m_player;
     [SerializeField] private GameObject m_descriptionBox;
     [SerializeField] private TMP_Text m_text;
 

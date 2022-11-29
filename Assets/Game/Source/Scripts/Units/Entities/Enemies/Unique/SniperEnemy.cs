@@ -29,11 +29,22 @@ public class SniperEnemy : Enemy
     public int MaxRange { get { return m_maxRange; } }
 
     private bool m_actionLocked;
-    public GameObject playerLock;
+    private GameObject playerLockIcon;
+
+    protected override void Start()
+    {
+        base.Start();
+
+        playerLockIcon = GameObject.Find("LockIcon");
+        playerLockIcon.SetActive(false);
+    }
 
     public override void DetermineAction()
     {
         m_actionLocked = false;
+
+        
+
 
         // Ignore unless within range
         if (Grid.Instance.GetDistanceBetweenUnits(this, GetPlayer()) > m_maxRange)
@@ -83,6 +94,8 @@ public class SniperEnemy : Enemy
 
     private void Update()
     {
+        if (!m_actionLocked)
+            return;
 
         ShowTargetIcon();
     }
@@ -91,7 +104,7 @@ public class SniperEnemy : Enemy
     {
         if (!m_actionLocked)
         {
-            playerLock.SetActive(false);
+            playerLockIcon.SetActive(false);
             return;
         }
 
@@ -108,12 +121,12 @@ public class SniperEnemy : Enemy
             {
                 if (hitUnit.CompareTag("Player"))
                 {
-                    playerLock.SetActive(true);
+                    playerLockIcon.SetActive(true);
                 }
             }
             else
             {
-                playerLock.SetActive(false);
+                playerLockIcon.SetActive(false);
             }
         }
 
@@ -123,7 +136,7 @@ public class SniperEnemy : Enemy
 
             if (node.IsObstructed)
             {
-                playerLock.SetActive(false);
+                playerLockIcon.SetActive(false);
             }
         }    
     }

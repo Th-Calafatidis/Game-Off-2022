@@ -51,8 +51,6 @@ public class Player : Entity, IDamagable
     [SerializeField] private Color m_validColor;
     [SerializeField] private Color m_invalidColor;
 
-    // Sniper Target Icon
-    public GameObject LockIcon;
 
     // AP
     private ActionPoints m_actionPoints;
@@ -76,7 +74,7 @@ public class Player : Entity, IDamagable
         get { return m_movementAmount; }
     }
 
-    
+
 
     public override void Awake()
     {
@@ -89,6 +87,16 @@ public class Player : Entity, IDamagable
         m_audioSource = GetComponent<AudioSource>();
     }
 
+    protected override void Start()
+    {
+        base.Start();
+
+        AbilityButtonManager.Instance.OnMoveButtonPress += StartMoveSelection;
+        AbilityButtonManager.Instance.OnMeleeButtonPress += StartMeleeSelection;
+        AbilityButtonManager.Instance.OnMindBlastButtonPress += StartMindblast;
+        AbilityButtonManager.Instance.OnBlinkButtonPress += StartBlinkAttack;
+    }
+
     public override void TakeDamage(int damage)
     {
         m_health.Damage(damage);
@@ -99,21 +107,10 @@ public class Player : Entity, IDamagable
         m_actionPoints.RestoreActionPoints();
     }
 
-    private void OnDeath()
+    public  void OnDeath()
     {
-        // Temporary solution to when player dies. Reloads the current scene.
-        this.Invoke(Utility.RestartScene, 3f);
+        // Can play particles sounds and animations here
     }
-
-    #region Debugging
-
-    [Button("Slow")]
-    public void Slow()
-    {
-        AddStatusEffect(new SlowStatusEffect(3));
-    }
-
-    #endregion
 
     #region Actions
 

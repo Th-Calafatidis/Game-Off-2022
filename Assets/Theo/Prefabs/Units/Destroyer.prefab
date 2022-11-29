@@ -2662,7 +2662,8 @@ MonoBehaviour:
   m_grenadeHazardType: 1
   m_grenadeHazardDuration: 2
   m_ironFistSound: {fileID: 8300000, guid: be72bcb511d8c5049a6241d3cfaf37d4, type: 3}
-  m_chargeSound: {fileID: 0}
+  m_chargeSetSound: {fileID: 8300000, guid: f603b7ef4561fa743842672f2dc14813, type: 3}
+  m_chargeGoSound: {fileID: 8300000, guid: 5b6d1fa34d6d44f4389c755a5f7f3305, type: 3}
   m_toxicBlastLaunchSound: {fileID: 8300000, guid: d1fa9a28d149fad47adc6d6367080236, type: 3}
   m_toxicBlastExplosionSound: {fileID: 8300000, guid: 7f466a08733f44344856b0619489994f, type: 3}
 --- !u!65 &506420314

@@ -44,18 +44,11 @@ public class AudioManager : MonoBehaviour
         // This is not ideal but we know we only have two sound clips so it will work for now.
         source.PlayOneShot(clips[0]);
 
-        var activeClip = clips[0];
-
-        Debug.Log(activeClip.name);
-
         yield return new WaitForSeconds(clips[0].length);
 
         source.clip = clips[1];
 
         source.Play();
 
-        activeClip = clips[1];
-
-        Debug.Log(activeClip.name);
     }
 }

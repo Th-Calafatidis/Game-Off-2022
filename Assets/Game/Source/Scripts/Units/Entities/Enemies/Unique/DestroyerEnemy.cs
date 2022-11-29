@@ -36,7 +36,8 @@ public class DestroyerEnemy : Enemy
 
     [Header("Audio")]
     [SerializeField] private AudioClip m_ironFistSound;
-    [SerializeField] private AudioClip m_chargeSound;
+    [SerializeField] private AudioClip m_chargeSetSound;
+    [SerializeField] private AudioClip m_chargeGoSound;
     [SerializeField] private AudioClip m_toxicBlastLaunchSound;
     [SerializeField] private AudioClip m_toxicBlastExplosionSound;
 
@@ -75,6 +76,7 @@ public class DestroyerEnemy : Enemy
     {
         // Play Charge Set animation
         Animator.SetBool("chargeset", true);
+        m_audioSource.PlayOneShot(m_chargeSetSound);
 
         // First we have to determine if we can charge the whole way, or if we have to stop early.
         // If we have to stop, determine what we hit and deal damage to the tile stopping enemy.
@@ -88,7 +90,7 @@ public class DestroyerEnemy : Enemy
         CreateHighlight(Grid.Instance.GetTilesBetween(GridPosition, endPosition), Color.red);
 
         ICombatAction charge = new ChargeAction(this, endPosition, m_chargeDamage, m_chargeKnockback, m_chargeSpeed,
-            () => { Animator.SetBool("chargeset", false); Animator.SetTrigger("chargego");} );
+            () => { Animator.SetBool("chargeset", false); Animator.SetTrigger("chargego"); m_audioSource.PlayOneShot(m_chargeGoSound); } );
         SetAction(charge);
 
         SetLine("charge", m_chargeDamage);
