@@ -6467,16 +6467,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 64037453863699544, guid: e8a64a44bedfda14fad87780ca17df52, type: 3}
+      propertyPath: m_zoomLerp
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 64037453863699544, guid: e8a64a44bedfda14fad87780ca17df52, type: 3}
       propertyPath: m_lerpSpeed
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 64037453863699544, guid: e8a64a44bedfda14fad87780ca17df52, type: 3}
       propertyPath: m_moveSpeed
-      value: 5
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 64037453863699544, guid: e8a64a44bedfda14fad87780ca17df52, type: 3}
       propertyPath: m_zoomSpeed
-      value: 30
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 64037453863699544, guid: e8a64a44bedfda14fad87780ca17df52, type: 3}
       propertyPath: m_focalPoint

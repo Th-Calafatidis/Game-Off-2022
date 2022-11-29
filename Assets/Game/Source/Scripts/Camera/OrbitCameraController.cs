@@ -17,6 +17,7 @@ public class OrbitCameraController : MonoBehaviour
     [SerializeField] private Transform m_focalPoint;
     [SerializeField] private float m_sensitivity;
     [SerializeField] private float m_zoomSpeed;
+    [SerializeField] private float m_zoomLerp = 0.25f;
     [SerializeField] private float m_moveSpeed = 5f;
     [SerializeField] private float m_lerpSpeed = 0.25f;
 
@@ -80,7 +81,21 @@ public class OrbitCameraController : MonoBehaviour
     {
         // Zoom camera
         float scroll = Input.GetAxis("Mouse ScrollWheel");
-        cam.fieldOfView += scroll * -m_zoomSpeed * Time.deltaTime;
+
+        if (cam.orthographic)
+        {
+            cam.orthographicSize += scroll * -m_zoomSpeed * Time.deltaTime;
+        }
+        else
+        {
+            var fov = cam.fieldOfView;
+
+            fov += scroll * -m_zoomSpeed;
+
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fov, m_zoomLerp);
+        }
+        
+        
     }
 
     private void MoveCamera()
