@@ -9,6 +9,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class OrbitCameraController : MonoBehaviour
 {
@@ -16,12 +17,24 @@ public class OrbitCameraController : MonoBehaviour
     [SerializeField] private Transform m_focalPoint;
     [SerializeField] private float m_sensitivity;
     [SerializeField] private float m_zoomSpeed;
+    [SerializeField] private float m_moveSpeed = 5f;
+    [SerializeField] private float m_lerpSpeed = 0.25f;
+
+    private Camera cam;
 
     private void LateUpdate()
     {
+        MoveCamera();
         CursorHiding();
         Rotation();
         Zooming();
+    }
+
+    private void Awake()
+    {
+        m_focalPoint.position = transform.position;
+
+        cam = GetComponent<Camera>();
     }
 
     /// <summary>
@@ -67,6 +80,25 @@ public class OrbitCameraController : MonoBehaviour
     {
         // Zoom camera
         float scroll = Input.GetAxis("Mouse ScrollWheel");
-        transform.position += transform.forward * scroll * m_zoomSpeed;
+        cam.fieldOfView += scroll * -m_zoomSpeed * Time.deltaTime;
     }
+
+    private void MoveCamera()
+    {
+
+        float xInput = Input.GetAxis("Horizontal");
+        float zInput = Input.GetAxis("Vertical");
+
+        Vector3 input = new Vector3(xInput, 0, zInput);
+
+        if(input != Vector3.zero)
+        {
+            m_focalPoint.Translate(input * m_moveSpeed * Time.deltaTime);
+
+            Vector3 leprPosition = new Vector3(m_focalPoint.position.x, m_focalPoint.position.y, m_focalPoint.position.z);
+
+            transform.position = Vector3.Lerp(transform.position, leprPosition, m_lerpSpeed);
+        }
+    }
+        
 }
