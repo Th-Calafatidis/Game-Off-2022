@@ -10,10 +10,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
     [SerializeField] private GameObject m_topMenu;
+    [SerializeField] private GameObject m_backButton;
 
     #region Top Menu
 
@@ -28,6 +30,7 @@ public class MainMenuController : MonoBehaviour
     public void OpenSettingsMenu()
     {
         m_topMenu.SetActive(false);
+        m_backButton.SetActive(true);
     }
 
     public void ExitGame()
@@ -38,6 +41,13 @@ public class MainMenuController : MonoBehaviour
     public void OpenCreditsMenu()
     {
         m_topMenu.SetActive(false);
+        m_backButton.SetActive(true);
+    }
+
+    public void Back()
+    {
+        m_topMenu.SetActive(true);
+        m_backButton.SetActive(false);
     }
 
     #endregion
