@@ -176,6 +176,8 @@ public class BattleManager : MonoBehaviour
         m_player.RestoreAP();
         m_state = BattleState.Player;
 
+        Grid.Instance.BakeNavMesh();
+
         // Call event to signal that the player turn has started.
         OnPlayerTurnStart?.Invoke();
     }

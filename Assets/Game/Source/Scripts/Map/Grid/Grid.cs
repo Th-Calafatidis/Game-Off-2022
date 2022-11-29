@@ -29,7 +29,8 @@ public class Grid : MonoBehaviour
     private Pathfinder m_pathfinder;
 
     // To track where units are on the grid, we store them along with their positions in a dictionary.
-    public Dictionary<Unit, Vector2Int> UnitRegistry { get; private set; }
+    private Dictionary<Unit, Vector2Int> m_unitRegistry;
+    public Dictionary<Unit, Vector2Int> UnitRegistry { get { return m_unitRegistry; } set { m_unitRegistry = value; } }
 
     // We will also have to track all hazards on the grid for easy application
     private Dictionary<EnvironmentHazard, Vector2Int> m_hazardRegistry;
@@ -52,7 +53,7 @@ public class Grid : MonoBehaviour
         m_pathfinder = new Pathfinder(m_navmesh);
 
         // Registy
-        UnitRegistry = new Dictionary<Unit, Vector2Int>();
+        m_unitRegistry = new Dictionary<Unit, Vector2Int>();
         m_hazardRegistry = new Dictionary<EnvironmentHazard, Vector2Int>();
     }
 
@@ -577,7 +578,8 @@ public class Grid : MonoBehaviour
     public void RegisterUnit(Unit unit)
     {
         Vector2Int position = GetGridPosition(unit.transform.position);
-        UnitRegistry.Add(unit, position);
+        m_unitRegistry.Add(unit, position);
+
     }
 
     /// <summary>
@@ -586,7 +588,7 @@ public class Grid : MonoBehaviour
     /// <param name="unit"></param>
     public void UnregisterUnit(Unit unit)
     {
-        UnitRegistry.Remove(unit);
+        m_unitRegistry.Remove(unit);
     }
 
     /// <summary>
@@ -597,7 +599,7 @@ public class Grid : MonoBehaviour
     public void UpdateUnit(Unit unit)
     {
         Vector2Int position = GetGridPosition(unit.transform.position);
-        UnitRegistry[unit] = position;
+        m_unitRegistry[unit] = position;
 
         // Since a unit has moved, we need to rebake the navmesh.
         m_navmesh.Bake();
@@ -635,7 +637,7 @@ public class Grid : MonoBehaviour
     public Unit GetUnitAt(Vector2Int position)
     {
         // Look for unit in registry and return it
-        foreach (KeyValuePair<Unit, Vector2Int> unit in UnitRegistry)
+        foreach (KeyValuePair<Unit, Vector2Int> unit in m_unitRegistry)
         {
             if (unit.Value == position)
                 return unit.Key;
@@ -652,7 +654,7 @@ public class Grid : MonoBehaviour
     public List<Unit> GetUnitsOfType<T>() where T : Unit
     {
         List<Unit> units = new List<Unit>();
-        foreach (KeyValuePair<Unit, Vector2Int> unit in UnitRegistry)
+        foreach (KeyValuePair<Unit, Vector2Int> unit in m_unitRegistry)
         {
             if (unit.Key is T)
                 units.Add(unit.Key);

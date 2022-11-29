@@ -45,11 +45,13 @@ public class DestructableObject : Unit, IPushable
 
         // Initialize health
         m_health = new Health(m_maxHealth);
-        m_health.OnHealthZero += OnDeath;        
+        m_health.OnHealthZero += OnDeath;
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
+
         if (!m_destroyOnTimer)
             return;
 
