@@ -8,4 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/Game/Scenes/Main Menu/Main Menu.unity
     guid: 84c270a2952951544bbd39559fbfd401
+  - enabled: 1
+    path: Assets/Theo/Scenes/Final Blockouts/Level1 - Blockout.unity
+    guid: 1517ee0d368a1fd48b14ac9682597c16
+  - enabled: 1
+    path: Assets/Theo/Scenes/plzworkscene.unity
+    guid: 477b4e592e726094e819a50f8281cfac
+  - enabled: 1
+    path: Assets/Theo/Scenes/Final Blockouts/Level2 - Blockout.unity
+    guid: ea52740bc07cacb4a956cb2bd4184e13
   m_configObjects: {}

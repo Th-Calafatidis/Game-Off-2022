@@ -8,12 +8,8 @@
 // -----------------------
 // ------------------- */
 
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.LowLevel;
-using UnityEngine.Tilemaps;
-using UnityEngine.WSA;
 
 public class SniperEnemy : Enemy
 {

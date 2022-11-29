@@ -49,7 +49,7 @@ public class OrbitCameraController : MonoBehaviour
             // stopping to move camera.
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            
+
         }
         else
         {
@@ -94,8 +94,8 @@ public class OrbitCameraController : MonoBehaviour
 
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fov, m_zoomLerp);
         }
-        
-        
+
+
     }
 
     private void MoveCamera()
@@ -106,7 +106,7 @@ public class OrbitCameraController : MonoBehaviour
 
         Vector3 input = new Vector3(xInput, 0, zInput);
 
-        if(input != Vector3.zero)
+        if (input != Vector3.zero)
         {
             m_focalPoint.Translate(input * m_moveSpeed * Time.deltaTime);
 
@@ -115,5 +115,10 @@ public class OrbitCameraController : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, leprPosition, m_lerpSpeed);
         }
     }
-        
+
+    public void ToggleCameraMode()
+    {
+        cam.orthographic = !cam.orthographic;
+    }
+
 }
