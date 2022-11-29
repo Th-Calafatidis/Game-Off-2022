@@ -5,6 +5,11 @@
 // Description: This is an action that will target a unit (specifically the player) directly instead of a tile.
 //              The shot will then be fired, but will stop at the first obstacle it hits, and deal damage if possible.
 //              This way, the player can position between the enemy and an obstacle to block the shot.
+//
+// Edited: By Theodore on 28/11/2022
+// Added: onCompleted Action in TargetedShotAction constructor and m_onCompleted Action variable.
+// Also the call of this delegate when the Execute IEnumerator ends so that i can set the animations accordingly
+// at that time through the according Enemy scripts.
 // -----------------------
 // ------------------- */
 
@@ -20,6 +25,7 @@ public class TargetedShotAction : ICombatAction
     private Unit m_sender;
     private int m_damage;
     private Action m_onExecute;
+    private Action m_onCompleted;
 
     public IEnumerator Execute()
     {
@@ -49,15 +55,15 @@ public class TargetedShotAction : ICombatAction
             }
         }
 
-        m_sender.GetComponent<Enemy>().Animator.SetBool("isAiming", false);
-        m_sender.GetComponent<Enemy>().Animator.SetTrigger("isShooting");
-
         yield return 0;
+
+        m_onCompleted();
     }
 
-    public TargetedShotAction(Unit sender, int damage, Action onStart)
+    public TargetedShotAction(Unit sender, int damage, Action onStart, Action onComplete)
     {
         m_onExecute = onStart;
+        m_onCompleted = onComplete;
         m_sender = sender;
         m_damage = damage;
     }

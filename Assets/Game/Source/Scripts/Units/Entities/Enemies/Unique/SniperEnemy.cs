@@ -2,9 +2,9 @@
 // -----------------------
 // Creation date: 15/11/2022
 // Author: Alex
-// Edited by Theodore on 24/11/2022
 // Description: This enemy will try to snipe the player when in line of sight. This is different from other enemies,
 //              as the player
+// Edited: By Theodore on 24/11/2022
 // -----------------------
 // ------------------- */
 
@@ -47,7 +47,8 @@ public class SniperEnemy : Enemy
         }
 
         // Create the action
-        ICombatAction targetedShot = new TargetedShotAction(this, m_damage, () => { PlaySound(m_shootSound); });
+        ICombatAction targetedShot = new TargetedShotAction(this, m_damage, () => { PlaySound(m_shootSound); transform.LookAt(GetPlayer().transform); }, 
+            () => {Animator.SetBool("isAiming", false); Animator.SetTrigger("isShooting"); });
         SetAction(targetedShot);
 
         m_actionLocked = true;

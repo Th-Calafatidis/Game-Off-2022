@@ -2,9 +2,11 @@
 // -----------------------
 // Creation date: 04/11/2022
 // Author: Alex
-// Edited by Theodore on 26//11/2022
 // Description: This is the main class for the player entity. It is responsible for setting up the player's health and other
 //              things.
+//
+// Edited: By Theodore on 26//11/2022
+// Added: Animations and SFX set through the action delegates of each ICombatAction declaration.
 // -----------------------
 // ------------------- */
 
@@ -291,7 +293,8 @@ public class Player : Entity, IDamagable
         // If we have a valid target, we will attack it.
         if (target != null)
         {
-            ICombatAction melee = new SingleDamageAction(targetPosition, m_meleeDamage);
+            ICombatAction melee = new SingleDamageAction(targetPosition, m_meleeDamage, 
+                () => { Animator.SetTrigger("melee"); m_audioSource.PlayOneShot(m_meleeAudio); } );
             StartCoroutine(melee.Execute());
 
             // Play attack animation and face towards enemy

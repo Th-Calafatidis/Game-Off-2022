@@ -113,7 +113,7 @@ public class GuardianEnemy : Enemy
 
         CreateHighlight(attackPosition, Color.red);
 
-        ICombatAction damage = new SingleDamageAction(attackPosition, m_meleeDamage);
+        ICombatAction damage = new SingleDamageAction(attackPosition, m_meleeDamage, () => { Animator.SetTrigger("melee"); });
         SetAction(damage);
     }
 

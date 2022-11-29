@@ -2639,6 +2639,7 @@ MonoBehaviour:
   m_physicalMovementSpeed: 5
   m_displayName: 
   m_actionPriority: 1
+  m_destroyDelay: 0
   m_lines:
   - Tag: charge
     Line: Once I start charging, nothing will be able to stop me. Anyone caught in
@@ -2660,6 +2661,9 @@ MonoBehaviour:
   m_grenadeRadius: 1
   m_grenadeHazardType: 1
   m_grenadeHazardDuration: 2
+  m_ironFistSound: {fileID: 0}
+  m_chargeSound: {fileID: 0}
+  m_toxicBlast: {fileID: 0}
 --- !u!65 &506420314
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2811,9 +2815,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6878178865632660949}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 43466b86440e2794dab6993b30b46df8, type: 2}
+  m_Controller: {fileID: 9100000, guid: 95e9af027f4d5604e80f0c3fa2167081, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

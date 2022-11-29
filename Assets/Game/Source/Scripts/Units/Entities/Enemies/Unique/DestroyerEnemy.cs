@@ -5,6 +5,9 @@
 // Description: This enemy will attempt to charge towards the player if within range in a straight line.
 //              If the player is one tile away, a normal melee attack will be performed instead.
 //              If not close enough for melee, but not in a straight line, enemy will throw a grenade causing poison hazard.
+//
+// Edited: By Theodore 29/11/2022
+// Added: Animations and SFX
 // -----------------------
 // ------------------- */
 
@@ -33,8 +36,15 @@ public class DestroyerEnemy : Enemy
     [Header("Audio")]
     [SerializeField] private AudioClip m_ironFistSound;
     [SerializeField] private AudioClip m_chargeSound;
-    [SerializeField] private AudioClip m_toxicBlast;
+    [SerializeField] private AudioClip m_toxicBlastSound;
 
+
+    public override void Awake()
+    {
+        base.Awake();
+
+        m_audioSource = GetComponent<AudioSource>();
+    }
     public override void DetermineAction()
     {
         ClearHighlights();
@@ -86,10 +96,12 @@ public class DestroyerEnemy : Enemy
 
         CreateHighlight(attackPosition, Color.red);
 
-        ICombatAction damage = new SingleDamageAction(attackPosition, m_fistDamage);
+        ICombatAction damage = new SingleDamageAction(attackPosition, m_fistDamage, 
+            () => { Animator.SetTrigger("melee"); m_audioSource.PlayOneShot(m_ironFistSound); });
         SetAction(damage);
 
         SetLine("fist", m_fistDamage);
+
     }
 
     private void Grenade()
@@ -108,7 +120,9 @@ public class DestroyerEnemy : Enemy
 
     public override void DetermineMove()
     {
-        Debug.Log(gameObject.name + " moves");
+
+        // Is not moving so the Animation accordingly
+        Animator.SetBool("moving", false);
 
         // Ignore if we are already next to the player
         if (Grid.Instance.IsAdjacent(GridPosition, GetPlayer().GridPosition))
@@ -138,10 +152,10 @@ public class DestroyerEnemy : Enemy
                     targetPosition = potentialPosition;
             }
         }
-        
+
         // Move to the closest position
         List<Vector2Int> path = Grid.Instance.GetPath(GridPosition, targetPosition);
-        
+
         if (path == null) return;
 
         // Remove all points in path that is outside of movement range of enemy.
@@ -153,11 +167,15 @@ public class DestroyerEnemy : Enemy
         // Perform the move
         ICombatAction move = new MoveAction(this, path, m_physicalMovementSpeed);
         SetAction(move);
+
+        // Set Animation to move
+        Animator.SetBool("moving", true);
     }
 
     public override void OnFinishedMoving()
     {
-        
+        // Is not moving so the Animation accordingly
+        Animator.SetBool("moving", false);
     }
 
     public override void OnPushed()

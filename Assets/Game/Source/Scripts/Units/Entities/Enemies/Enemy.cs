@@ -32,7 +32,7 @@ public abstract class Enemy : Entity, IPushable
     private ActionLine m_currentLine;
 
     private EnemyDisplay m_display;
-    private AudioSource m_audioSource;
+    protected AudioSource m_audioSource;
 
     public ICombatAction IntendedAction
     {
