@@ -7,6 +7,7 @@
 // -----------------------
 // ------------------- */
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,8 +20,13 @@ public class ChargeAction : ICombatAction
     private int m_knockbackForce;
     private int m_speed;
 
+    private Action m_onExecute;
+    private Action m_onCompleted;
+
     public IEnumerator Execute()
     {
+        m_onExecute?.Invoke();
+
         // Keeps moving in the direction of the target position until either unit arrives at that
         // position, or something is hit. If something is hit, apply knockback and damage.
         Vector2Int currentPosition = m_unit.GridPosition;
@@ -54,10 +60,14 @@ public class ChargeAction : ICombatAction
                 nextPosition = Grid.Instance.PositionWithDirection(currentPosition, direction);
             }
         }
+
+        m_onCompleted?.Invoke();
     }
 
-    public ChargeAction(Unit unit, Vector2Int targetPosition, int damage, int knockbackForce, int speed)
+    public ChargeAction(Unit unit, Vector2Int targetPosition, int damage, int knockbackForce, int speed, Action onStart = null, Action onComplete = null)
     {
+        m_onExecute = onStart;
+        m_onCompleted = onComplete;
         m_unit = unit;
         m_targetPosition = targetPosition;
         m_damage = damage;

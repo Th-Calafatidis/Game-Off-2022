@@ -24,7 +24,7 @@ public class SingleDamageAction : ICombatAction
 
     public IEnumerator Execute()
     {
-        m_onExecute();
+        m_onExecute?.Invoke();
 
         // Check if there is a target at the position.
         IDamagable target = Grid.Instance.GetUnitAt(TargetPosition);
@@ -35,10 +35,7 @@ public class SingleDamageAction : ICombatAction
 
         yield return 0;
 
-        if (m_onCompleted == null)
-            yield break;
-
-        m_onCompleted();
+        m_onCompleted?.Invoke();
     }
 
     public SingleDamageAction(Vector2Int targetPosition, int damageAmount, Action onStart = null, Action onComplete = null)

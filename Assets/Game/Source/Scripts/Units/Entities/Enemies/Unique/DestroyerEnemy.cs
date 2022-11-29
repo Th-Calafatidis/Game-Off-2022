@@ -36,7 +36,8 @@ public class DestroyerEnemy : Enemy
     [Header("Audio")]
     [SerializeField] private AudioClip m_ironFistSound;
     [SerializeField] private AudioClip m_chargeSound;
-    [SerializeField] private AudioClip m_toxicBlastSound;
+    [SerializeField] private AudioClip m_toxicBlastLaunchSound;
+    [SerializeField] private AudioClip m_toxicBlastExplosionSound;
 
 
     public override void Awake()
@@ -48,14 +49,14 @@ public class DestroyerEnemy : Enemy
     public override void DetermineAction()
     {
         ClearHighlights();
-        
+
         // Charge will be prioritized if the enemy is in a straight line, and is more than 1 tile away.
         // If the player is 1 tile away, a normal melee attack will be performed instead.
         // Else, ranged attack will be performed.
         Vector2Int playerPosition = GetPlayer().GridPosition;
         int playerDistance = Grid.Instance.GetDistanceBetweenUnits(this, GetPlayer());
 
-        if (playerDistance <= m_chargeRange && !Grid.Instance.IsAdjacent(GridPosition, playerPosition) 
+        if (playerDistance <= m_chargeRange && !Grid.Instance.IsAdjacent(GridPosition, playerPosition)
             && Grid.Instance.InStraightLine(GridPosition, playerPosition))
             Charge();
 
@@ -71,6 +72,9 @@ public class DestroyerEnemy : Enemy
     /// </summary>
     private void Charge()
     {
+        // Play Charge Set animation
+        Animator.SetBool("chargeset", true);
+
         // First we have to determine if we can charge the whole way, or if we have to stop early.
         // If we have to stop, determine what we hit and deal damage to the tile stopping enemy.
         Vector2Int playerPosition = GetPlayer().GridPosition;
@@ -82,7 +86,8 @@ public class DestroyerEnemy : Enemy
         Vector2Int endPosition = Grid.Instance.GetTileInDirection(GridPosition, direction, m_chargeRange);
         CreateHighlight(Grid.Instance.GetTilesBetween(GridPosition, endPosition), Color.red);
 
-        ICombatAction charge = new ChargeAction(this, endPosition, m_chargeDamage, m_chargeKnockback, m_chargeSpeed);
+        ICombatAction charge = new ChargeAction(this, endPosition, m_chargeDamage, m_chargeKnockback, m_chargeSpeed,
+            () => { Animator.SetBool("chargeset", false); Animator.SetTrigger("chargego");} );
         SetAction(charge);
 
         SetLine("charge", m_chargeDamage);
@@ -96,7 +101,7 @@ public class DestroyerEnemy : Enemy
 
         CreateHighlight(attackPosition, Color.red);
 
-        ICombatAction damage = new SingleDamageAction(attackPosition, m_fistDamage, 
+        ICombatAction damage = new SingleDamageAction(attackPosition, m_fistDamage,
             () => { Animator.SetTrigger("melee"); m_audioSource.PlayOneShot(m_ironFistSound); });
         SetAction(damage);
 
@@ -112,7 +117,8 @@ public class DestroyerEnemy : Enemy
         CreateHighlight(targetTiles, Color.red);
 
         // Now we have to create the hazard
-        ICombatAction hazardCreation = new CreateHazardAction(targetTiles, m_grenadeHazardType, m_grenadeHazardDuration);
+        ICombatAction hazardCreation = new CreateHazardAction(targetTiles, m_grenadeHazardType, m_grenadeHazardDuration,
+            () => { Animator.SetTrigger("toxicblast"); m_audioSource.PlayOneShot(m_toxicBlastLaunchSound); });
         SetAction(hazardCreation);
 
         SetLine("grenade");
@@ -200,5 +206,21 @@ public class DestroyerEnemy : Enemy
         {
             Grenade();
         }
+    }
+
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+
+        //Play animation and sfx
+        Animator.SetTrigger("hit");
+    }
+
+    public override void OnDeath()
+    {
+        base.OnDeath();
+
+        //Play animation and sfx
+        Animator.SetTrigger("death");
     }
 }

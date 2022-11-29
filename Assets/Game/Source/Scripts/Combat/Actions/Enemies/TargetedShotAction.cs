@@ -8,8 +8,8 @@
 //
 // Edited: By Theodore on 28/11/2022
 // Added: onCompleted Action in TargetedShotAction constructor and m_onCompleted Action variable.
-// Also the call of this delegate when the Execute IEnumerator ends so that i can set the animations accordingly
-// at that time through the according Enemy scripts.
+// Also the call of this delegate when the Execute IEnumerator starts / ends with a null check so that i can set
+// the animations accordingly at that time through the according Enemy scripts.
 // -----------------------
 // ------------------- */
 
@@ -29,7 +29,7 @@ public class TargetedShotAction : ICombatAction
 
     public IEnumerator Execute()
     {
-        m_onExecute();
+        m_onExecute?.Invoke();
 
         // There will only ever be one player on the grid, so we can safely assume that the first unit in the list is the player.
         Unit player = Grid.Instance.GetUnitsOfType<Player>()[0];
@@ -57,10 +57,10 @@ public class TargetedShotAction : ICombatAction
 
         yield return 0;
 
-        m_onCompleted();
+        m_onCompleted?.Invoke();
     }
 
-    public TargetedShotAction(Unit sender, int damage, Action onStart, Action onComplete)
+    public TargetedShotAction(Unit sender, int damage, Action onStart = null, Action onComplete = null)
     {
         m_onExecute = onStart;
         m_onCompleted = onComplete;
