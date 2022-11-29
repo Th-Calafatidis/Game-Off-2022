@@ -16,6 +16,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip m_buttonDenied;
     [SerializeField] private AudioClip m_buttonSelection;
 
+    [SerializeField] private float m_delayBetweenTransitions;
+
     private AudioSource m_audioScource;
 
 
@@ -44,13 +46,17 @@ public class AudioManager : MonoBehaviour
         // This is not ideal but we know we only have two sound clips so it will work for now.
         source.PlayOneShot(clips[0]);
 
+        Debug.Log(clips[0].name);
+
         yield return new WaitForSeconds(clips[0].length);
 
         source.clip = clips[1];
 
-        yield return new WaitForSeconds(Time.deltaTime);
+        yield return new WaitForSeconds(m_delayBetweenTransitions);        
 
         source.Play();
+
+        Debug.Log(clips[1].name);
 
     }
 }
