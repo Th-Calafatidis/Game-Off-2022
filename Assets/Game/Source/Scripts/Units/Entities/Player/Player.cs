@@ -478,7 +478,7 @@ public class Player : Entity, IDamagable
     /// Gets the current grid position that cursor is at.
     /// </summary>
     /// <returns></returns>
-    private Vector2Int GetCursorGridPosition()
+    public Vector2Int GetCursorGridPosition()
     {
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
