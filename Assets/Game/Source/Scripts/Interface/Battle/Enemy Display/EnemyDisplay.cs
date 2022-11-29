@@ -4,6 +4,9 @@
 // Author: Alex
 // Description: Controls a window to display information about a unit on hover, as well as a line for their
 //              intended action.
+// 
+// Edited: By Theodore 29/11/2022
+// Added: UpdateStatusIcons method and subscribed LoadEnemyData on the two delegates so that the method is functional.
 // -----------------------
 // ------------------- */
 
@@ -11,12 +14,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class EnemyDisplay : MonoBehaviour
 {
     [SerializeField] private TMP_Text m_actionLineText;
     [SerializeField] private TMP_Text m_healthText;
     //[SerializeField] private TMP_Text m_shieldText;
+    [SerializeField] private GameObject m_posionIcon;
+    [SerializeField] private GameObject m_fireIcon;
+    [SerializeField] private GameObject m_slowIcon;
+    [SerializeField] private Transform m_statusIconsContainer;
 
     private Enemy m_enemy;
 
@@ -25,7 +33,7 @@ public class EnemyDisplay : MonoBehaviour
         m_enemy = null;
         Hide();
     }
-        
+
     /// <summary>
     /// Sets the information of the display to that of an enemy.
     /// </summary>
@@ -43,6 +51,9 @@ public class EnemyDisplay : MonoBehaviour
         m_enemy = enemy;
         m_enemy.Health.OnHealthChanged += LoadEnemyData;
         m_enemy.Health.OnHealthZero += Hide;
+
+        m_enemy.OnEffectAdded += LoadEnemyData;
+        m_enemy.OnEffectRemoved += LoadEnemyData;
     }
 
     /// <summary>
@@ -78,9 +89,34 @@ public class EnemyDisplay : MonoBehaviour
                 m_actionLineText.text = m_enemy.GetActionLine();
             else
                 m_actionLineText.text = "";
-            
+
             m_healthText.text = "<color=red>" + m_enemy.Health.CurrentHealth + "/" + m_enemy.Health.MaxHealth;
             //m_shieldText.text = "<color=blue>" + m_enemy.Health.Shield.ToString();
+
+            UpdateStatusIcons();
+        }
+    }
+
+    private void UpdateStatusIcons()
+    {
+        foreach (Transform child in m_statusIconsContainer)
+        {
+            child.gameObject.SetActive(false);
+        }
+
+        foreach (StatusEffect status in m_enemy.StatusEffects)
+        {
+            switch (status)
+            {
+                case FireStatusEffect:
+                    m_fireIcon.SetActive(true); break;
+
+                case PoisonStatusEffect:
+                    m_posionIcon.SetActive(true); break;
+
+                case SlowStatusEffect:
+                    m_slowIcon.SetActive(true); break;
+            }
         }
     }
 }

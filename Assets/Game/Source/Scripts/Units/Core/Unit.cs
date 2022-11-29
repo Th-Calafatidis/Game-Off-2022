@@ -7,9 +7,12 @@
 //              A unit can be a player, an enemy, something placed down, destructible objects etc.
 //
 //              This is the base for any unit in the game. It contains the basic functionality for movement.
+// Edited: By Theodore on 29/11/2022
+// Added: OnEffectAdded and OnEffectRemoved delegates.
 // -----------------------
 // ------------------- */
 
+using System;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,12 +20,15 @@ using UnityEngine;
 
 public abstract class Unit : MonoBehaviour, IDamagable
 {
-    private List<StatusEffect> m_statusEffects;
+    public List<StatusEffect> StatusEffects { get; private set; }
+
+    public Action OnEffectAdded;
+    public Action OnEffectRemoved;
 
     public virtual void Awake()
     {
         // Initialize status effect list
-        m_statusEffects = new List<StatusEffect>();
+        StatusEffects = new List<StatusEffect>();
     }
 
     public virtual void OnEnable()
@@ -208,20 +214,22 @@ public abstract class Unit : MonoBehaviour, IDamagable
             RemoveStatusEffect(effect);
         }
 
-        m_statusEffects.Add(effect);
+        StatusEffects.Add(effect);
         effect.OnEffectAdd(this);
+        OnEffectAdded?.Invoke();
     }
 
     public void RemoveStatusEffect(StatusEffect effect)
     {
         // Remove all status effects from list with same type
-        m_statusEffects.RemoveAll(x => x.GetType() == effect.GetType());
+        StatusEffects.RemoveAll(x => x.GetType() == effect.GetType());
         effect.OnEffectRemoved(this);
+        OnEffectRemoved?.Invoke();
     }
 
     public bool HasEffect(StatusEffect effect)
     {
-        foreach (StatusEffect e in m_statusEffects)
+        foreach (StatusEffect e in StatusEffects)
         {
             if (e.GetType() == effect.GetType())
                 return true;
@@ -232,7 +240,7 @@ public abstract class Unit : MonoBehaviour, IDamagable
 
     public StatusEffect GetStatusEffect<T>()
     {
-        foreach (StatusEffect effect in m_statusEffects)
+        foreach (StatusEffect effect in StatusEffects)
         {
             if (effect is T)
             {
@@ -250,7 +258,7 @@ public abstract class Unit : MonoBehaviour, IDamagable
     {
         // Because the list of effects might be modified by removing the effect while in the loop,
         // we create a copy of the list and iterate through that.
-        List<StatusEffect> effects = new List<StatusEffect>(m_statusEffects);
+        List<StatusEffect> effects = new List<StatusEffect>(StatusEffects);
 
         foreach (StatusEffect effect in effects)
         {
@@ -265,7 +273,7 @@ public abstract class Unit : MonoBehaviour, IDamagable
     {
         // Because the list of effects might be modified by removing the effect while in the loop,
         // we create a copy of the list and iterate through that.
-        List<StatusEffect> effects = new List<StatusEffect>(m_statusEffects);
+        List<StatusEffect> effects = new List<StatusEffect>(StatusEffects);
 
         foreach (StatusEffect effect in effects)
         {

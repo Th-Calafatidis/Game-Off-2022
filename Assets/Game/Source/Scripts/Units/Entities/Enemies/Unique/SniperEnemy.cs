@@ -12,6 +12,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.LowLevel;
+using UnityEngine.Tilemaps;
+using UnityEngine.WSA;
 
 public class SniperEnemy : Enemy
 {
@@ -27,7 +29,7 @@ public class SniperEnemy : Enemy
     public int MaxRange { get { return m_maxRange; } }
 
     private bool m_actionLocked;
-    private GameObject playerLock;
+    public GameObject playerLock;
 
     public override void DetermineAction()
     {
@@ -79,42 +81,50 @@ public class SniperEnemy : Enemy
     }
 
 
-    //private void Update()
-    //{
-    //    playerLock = GetPlayer().GetComponent<Player>().LockIcon;
+    private void Update()
+    {
 
-    //    ShowTargetIcon();
-    //}
+        ShowTargetIcon();
+    }
 
-    //private void ShowTargetIcon()
-    //{
-    //    if (!m_actionLocked)
-    //    {
-    //        playerLock.SetActive(false);
-    //        return;
-    //    }
-            
+    private void ShowTargetIcon()
+    {
+        if (!m_actionLocked)
+        {
+            playerLock.SetActive(false);
+            return;
+        }
 
-    //    List<Vector2Int> tilesToPlayer = Grid.Instance.BresenhamLine(this.GridPosition.x, this.GridPosition.y,
-    //                                                                 GetPlayer().GridPosition.x, GetPlayer().GridPosition.y);
 
-    //    for (int i = 1; i < tilesToPlayer.Count; i++)
-    //    {
+        List<Vector2Int> tilesToPlayer = Grid.Instance.BresenhamLine(this.GridPosition.x, this.GridPosition.y,
+                                                                     GetPlayer().GridPosition.x, GetPlayer().GridPosition.y);
 
-    //        // Since a unit counts as occupying a tile, we have to check for that manually first.
-    //        Unit hitUnit = Grid.Instance.GetUnitAt(tilesToPlayer[i]);
-    //        if (hitUnit != null)
-    //        {
-    //            if (hitUnit.CompareTag("Player"))
-    //            {
-    //                playerLock = hitUnit.GetComponent<Player>().LockIcon;
-    //                playerLock.SetActive(true);
-    //            }
-    //        }
-    //        else
-    //        {
-    //                playerLock.SetActive(false);
-    //        }
-    //    }
-    //}
+        for (int i = 1; i < tilesToPlayer.Count; i++)
+        {
+
+            // Since a unit counts as occupying a tile, we have to check for that manually first.
+            Unit hitUnit = Grid.Instance.GetUnitAt(tilesToPlayer[i]);
+            if (hitUnit != null)
+            {
+                if (hitUnit.CompareTag("Player"))
+                {
+                    playerLock.SetActive(true);
+                }
+            }
+            else
+            {
+                playerLock.SetActive(false);
+            }
+        }
+
+        for (int i = 1; i < tilesToPlayer.Count - 1; i++)
+        {
+            var node = Grid.Instance.GetNodeAt(tilesToPlayer[i].x, tilesToPlayer[i].y);
+
+            if (node.IsObstructed)
+            {
+                playerLock.SetActive(false);
+            }
+        }    
+    }
 }
