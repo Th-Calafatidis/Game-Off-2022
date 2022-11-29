@@ -52,6 +52,8 @@ public class AudioManager : MonoBehaviour
 
         source.clip = clips[1];
 
+        yield return new WaitForSeconds(Time.deltaTime);
+
         source.Play();
 
         activeClip = clips[1];
