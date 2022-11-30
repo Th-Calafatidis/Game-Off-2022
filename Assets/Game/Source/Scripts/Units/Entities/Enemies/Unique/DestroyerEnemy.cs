@@ -36,10 +36,12 @@ public class DestroyerEnemy : Enemy
 
     [Header("Audio")]
     [SerializeField] private AudioClip m_ironFistSound;
-    [SerializeField] private AudioClip m_chargeSetSound;
-    [SerializeField] private AudioClip m_chargeGoSound;
+    [SerializeField] private AudioClip m_chargePrepSound;
+    [SerializeField] private AudioClip m_chargeLaunchSound;
     [SerializeField] private AudioClip m_toxicBlastLaunchSound;
     [SerializeField] private AudioClip m_toxicBlastExplosionSound;
+    [SerializeField] private AudioClip m_hitSound;
+    [SerializeField] private AudioClip m_deathSound;
 
 
     public override void Awake()
@@ -76,7 +78,7 @@ public class DestroyerEnemy : Enemy
     {
         // Play Charge Set animation
         Animator.SetBool("chargeset", true);
-        m_audioSource.PlayOneShot(m_chargeSetSound);
+        m_audioSource.PlayOneShot(m_chargePrepSound);
 
         // First we have to determine if we can charge the whole way, or if we have to stop early.
         // If we have to stop, determine what we hit and deal damage to the tile stopping enemy.
@@ -90,7 +92,7 @@ public class DestroyerEnemy : Enemy
         CreateHighlight(Grid.Instance.GetTilesBetween(GridPosition, endPosition), Color.red);
 
         ICombatAction charge = new ChargeAction(this, endPosition, m_chargeDamage, m_chargeKnockback, m_chargeSpeed,
-            () => { Animator.SetBool("chargeset", false); Animator.SetTrigger("chargego"); m_audioSource.PlayOneShot(m_chargeGoSound); } );
+            () => { Animator.SetBool("chargeset", false); Animator.SetTrigger("chargego"); m_audioSource.PlayOneShot(m_chargeLaunchSound); } );
         SetAction(charge);
 
         SetLine("charge", m_chargeDamage);
@@ -217,6 +219,7 @@ public class DestroyerEnemy : Enemy
 
         //Play animation and sfx
         Animator.SetTrigger("hit");
+        PlaySound(m_hitSound);
     }
 
     public override void OnDeath()
@@ -225,5 +228,6 @@ public class DestroyerEnemy : Enemy
 
         //Play animation and sfx
         Animator.SetTrigger("death");
+        PlaySound(m_deathSound);
     }
 }

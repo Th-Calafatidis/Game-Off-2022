@@ -9,6 +9,10 @@ public class AudioManager : MonoBehaviour
     [Header("Audio Clips")]
     [SerializeField] private List<AudioClip> m_menuSounds;
     [SerializeField] private List<AudioClip> m_battleSounds;
+    [SerializeField] private AudioClip m_winSound;
+    [SerializeField] private AudioClip m_lossSound;
+
+    
 
     [Header("Button Effect Clips")]
     [SerializeField] private AudioClip m_buttonBack;
@@ -20,6 +24,16 @@ public class AudioManager : MonoBehaviour
 
     private AudioSource m_audioScource;
 
+    public AudioClip WinSound { get { return m_winSound; } }
+    public AudioClip LossSound { get { return m_lossSound; } }
+
+    public static AudioManager Instance { get; private set; }
+
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {

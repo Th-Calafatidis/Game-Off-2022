@@ -47,6 +47,10 @@ public class Player : Entity, IDamagable
     [SerializeField] private float m_blinkWindupDelay;
     [SerializeField] private AudioClip m_blinkAudio;
 
+    [Header("Generic Audio")]
+    [SerializeField] private AudioClip m_hitSound;
+    [SerializeField] private AudioClip m_deathSound;
+
     [Header("Line Renderer")]
     [SerializeField] private float m_width = 0.15f;
     [SerializeField] private Color m_validColor;
@@ -107,6 +111,8 @@ public class Player : Entity, IDamagable
     public override void TakeDamage(int damage)
     {
         m_health.Damage(damage);
+        m_animator.SetTrigger("hit");
+        m_audioSource.PlayOneShot(m_hitSound);
     }
 
     public void RestoreAP()
@@ -117,6 +123,8 @@ public class Player : Entity, IDamagable
     public  void OnDeath()
     {
         // Can play particles sounds and animations here
+        m_audioSource.PlayOneShot(m_deathSound);
+        m_animator.SetTrigger("death");
     }
 
     #region Actions

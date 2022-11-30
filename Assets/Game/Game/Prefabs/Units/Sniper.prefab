@@ -718,6 +718,8 @@ MonoBehaviour:
   m_damage: 1
   m_lockOnSound: {fileID: 8300000, guid: e3ce527d30a84b144837e11cd01c0576, type: 3}
   m_shootSound: {fileID: 8300000, guid: 6040830929d8d7547b2a15a267343d92, type: 3}
+  m_hitSound: {fileID: 8300000, guid: 125748d809bae574489c8328775b1c5b, type: 3}
+  m_deathSound: {fileID: 8300000, guid: 231a804aad4bb6e4e8d3e2082868e917, type: 3}
 --- !u!82 &8868811595360171589
 AudioSource:
   m_ObjectHideFlags: 0

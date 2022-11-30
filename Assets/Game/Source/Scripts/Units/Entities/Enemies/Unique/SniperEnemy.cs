@@ -21,6 +21,8 @@ public class SniperEnemy : Enemy
     [Header("Audio")]
     [SerializeField] private AudioClip m_lockOnSound;
     [SerializeField] private AudioClip m_shootSound;
+    [SerializeField] private AudioClip m_hitSound;
+    [SerializeField] private AudioClip m_deathSound;
 
     public int MaxRange { get { return m_maxRange; } }
 
@@ -77,14 +79,16 @@ public class SniperEnemy : Enemy
     {
         base.TakeDamage(damage);
 
-        Animator.SetTrigger("isHit");
+        Animator.SetTrigger("hit");
+        PlaySound(m_hitSound);
     }
 
     public override void OnDeath()
     {
         base.OnDeath();
 
-        Animator.SetTrigger("isDead");
+        Animator.SetTrigger("death");
+        PlaySound(m_deathSound);
     }
 
 
