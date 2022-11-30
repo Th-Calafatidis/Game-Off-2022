@@ -136,10 +136,14 @@ public class Player : Entity, IDamagable
     {
         if (m_actionPoints.TotalActionPoints == 0)
         {
+            AudioManager.Instance.PlayButtonDeniedSound();
+
             return;
         }
 
         //if(m_abilitySelecting || m_moveSelecting) return;
+
+        AudioManager.Instance.PlayButtonPressSound();
 
         StartCoroutine(MoveSelection());
     }
@@ -237,6 +241,9 @@ public class Player : Entity, IDamagable
             // Clean up linerenderer after
             Destroy(lineRenderer.gameObject);
             m_preview.Hide();
+
+            // Play Cancel sound
+            m_audioSource.PlayOneShot(AudioManager.Instance.ButtonBack, AudioManager.Instance.ButtonSoundVolume);
         }
 
         m_moveSelecting = false;
@@ -263,11 +270,15 @@ public class Player : Entity, IDamagable
     {
         if (m_actionPoints.TotalActionPoints < m_meleeCost)
         {
+            AudioManager.Instance.PlayButtonDeniedSound();
+
             Debug.Log("Not enough action points to perform melee attack.");
             return;
         }
 
         if (m_abilitySelecting || m_moveSelecting) return;
+
+        AudioManager.Instance.PlayButtonPressSound();
 
         StartCoroutine(MeleeSelection());
     }
@@ -313,7 +324,7 @@ public class Player : Entity, IDamagable
         }
 
         // If we have a valid target, we will attack it.
-        if (target != null && target != this)
+        if (target != null && target != this && Input.GetKeyDown(KeyCode.Mouse0))
         {
             ICombatAction melee = new SingleDamageAction(targetPosition, m_meleeDamage,
                 () => { Animator.SetTrigger("melee"); m_audioSource.PlayOneShot(m_meleeAudio); });
@@ -330,6 +341,11 @@ public class Player : Entity, IDamagable
             m_actionPoints.SpendActionPoints(m_meleeCost);
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            AudioManager.Instance.PlayButtonBackSound();
+        }
+
         m_abilitySelecting = false;
     }
 
@@ -342,10 +358,15 @@ public class Player : Entity, IDamagable
         if (m_actionPoints.TotalActionPoints < m_mindBlastCost)
         {
             Debug.Log("Not enough action points to perform mindblast.");
+
+            AudioManager.Instance.PlayButtonDeniedSound();
+
             return;
         }
 
         //if (m_abilitySelecting || m_moveSelecting) return;
+
+        AudioManager.Instance.PlayButtonPressSound();
 
         StartCoroutine(PerformMindblast());
     }
@@ -392,6 +413,9 @@ public class Player : Entity, IDamagable
         if (m_actionPoints.TotalActionPoints < m_blinkCost)
         {
             Debug.Log("Not enough action points to perform blink attack.");
+
+            AudioManager.Instance.PlayButtonDeniedSound();
+
             return;
         }
 
@@ -422,6 +446,8 @@ public class Player : Entity, IDamagable
         }
 
         //if (m_abilitySelecting || m_moveSelecting) return;
+
+        AudioManager.Instance.PlayButtonPressSound();
 
         if (blinkPositions.Count > 0)
             StartCoroutine(BlinkSelection(blinkPositions));
@@ -502,6 +528,11 @@ public class Player : Entity, IDamagable
             Vector2Int damagePosition = Grid.Instance.PositionWithDirection(chosenPosition, chosenDirection);
             ICombatAction damage = new SingleDamageAction(damagePosition, m_blinkDamage);
             StartCoroutine(damage.Execute());
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            AudioManager.Instance.PlayButtonBackSound();
         }
 
         m_abilitySelecting = false;

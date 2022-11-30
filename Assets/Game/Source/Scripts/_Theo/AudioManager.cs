@@ -19,7 +19,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip m_buttonSelected;
     [SerializeField] private AudioClip m_buttonDenied;
     [SerializeField] private AudioClip m_buttonSelection;
-    [SerializeField] private float m_buttonSoundVolume;
+    public float ButtonSoundVolume;
 
     private AudioSource m_audioScource;
 
@@ -45,6 +45,12 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
+
+        if (AbilityButtonManager.Instance != null)
+        {
+            AbilityButtonManager.Instance.OnEndTurnButtonPress += PlayButtonPressSound;
+        }
+
         m_audioScource = GetComponent<AudioSource>();
 
         m_audioScource.Stop();
@@ -78,21 +84,21 @@ public class AudioManager : MonoBehaviour
 
     public void PlayButtonBackSound()
     {
-        m_audioScource.PlayOneShot(m_buttonBack, m_buttonSoundVolume);
+        m_audioScource.PlayOneShot(m_buttonBack, ButtonSoundVolume);
     }
 
     public void PlayButtonPressSound()
     {
-        m_audioScource.PlayOneShot(m_buttonSelected, m_buttonSoundVolume);
+        m_audioScource.PlayOneShot(m_buttonSelected, ButtonSoundVolume);
     }
 
     public void PlayButtonHighlightSound()
     {
-        m_audioScource.PlayOneShot(m_buttonSelection, m_buttonSoundVolume);
+        m_audioScource.PlayOneShot(m_buttonSelection, ButtonSoundVolume - 0.1f);
     }
 
     public void PlayButtonDeniedSound()
     {
-        m_audioScource.PlayOneShot(m_buttonDenied, m_buttonSoundVolume);
+        m_audioScource.PlayOneShot(m_buttonDenied, ButtonSoundVolume + 0.2f);
     }
 }
