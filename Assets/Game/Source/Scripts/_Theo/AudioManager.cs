@@ -12,20 +12,28 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip m_winSound;
     [SerializeField] private AudioClip m_lossSound;
 
-    
+
 
     [Header("Button Effect Clips")]
     [SerializeField] private AudioClip m_buttonBack;
     [SerializeField] private AudioClip m_buttonSelected;
     [SerializeField] private AudioClip m_buttonDenied;
     [SerializeField] private AudioClip m_buttonSelection;
-
-    [SerializeField] private float m_delayBetweenTransitions;
+    [SerializeField] private float m_buttonSoundVolume;
 
     private AudioSource m_audioScource;
 
     public AudioClip WinSound { get { return m_winSound; } }
     public AudioClip LossSound { get { return m_lossSound; } }
+
+    public AudioClip ButtonSelected { get { return m_buttonSelected; } }
+
+    public AudioClip ButtonDenied { get { return m_buttonDenied; } }
+
+    public AudioClip ButtonBack { get { return m_buttonBack; } }
+
+    public AudioClip ButtonSelection { get { return m_buttonSelection; } }
+
 
     public static AudioManager Instance { get; private set; }
 
@@ -60,17 +68,31 @@ public class AudioManager : MonoBehaviour
         // This is not ideal but we know we only have two sound clips so it will work for now.
         source.PlayOneShot(clips[0]);
 
-        Debug.Log(clips[0].name);
-
         yield return new WaitForSeconds(clips[0].length);
 
         source.clip = clips[1];
 
-        yield return new WaitForSeconds(m_delayBetweenTransitions);        
-
         source.Play();
 
-        Debug.Log(clips[1].name);
+    }
 
+    public void PlayButtonBackSound()
+    {
+        m_audioScource.PlayOneShot(m_buttonBack, m_buttonSoundVolume);
+    }
+
+    public void PlayButtonPressSound()
+    {
+        m_audioScource.PlayOneShot(m_buttonSelected, m_buttonSoundVolume);
+    }
+
+    public void PlayButtonHighlightSound()
+    {
+        m_audioScource.PlayOneShot(m_buttonSelection, m_buttonSoundVolume);
+    }
+
+    public void PlayButtonDeniedSound()
+    {
+        m_audioScource.PlayOneShot(m_buttonDenied, m_buttonSoundVolume);
     }
 }

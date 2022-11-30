@@ -8,6 +8,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -16,6 +17,16 @@ public class MainMenuController : MonoBehaviour
 {
     [SerializeField] private GameObject m_topMenu;
     [SerializeField] private GameObject m_backButton;
+    [SerializeField] private GameObject m_playButton;
+    [SerializeField] private GameObject m_optionsButton;
+    [SerializeField] private GameObject m_exitButton;
+
+    public static MainMenuController Instance { get; private set; }
+
+    public Action OnHighlighted;
+    public Action OnPressed;
+
+    private AudioSource m_audioSource;
 
     #region Top Menu
 
@@ -24,7 +35,7 @@ public class MainMenuController : MonoBehaviour
     /// </summary>
     public void StartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);       
     }
 
     public void OpenSettingsMenu()
