@@ -58,11 +58,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -200,8 +200,10 @@ MonoBehaviour:
   m_battleSounds:
   - {fileID: 8300000, guid: b6fb850f14e3ff44aa3325a7872b0368, type: 3}
   - {fileID: 8300000, guid: ec28eb905a95080429f9098950b53034, type: 3}
-  m_buttonBack: {fileID: 0}
-  m_buttonSelected: {fileID: 0}
-  m_buttonDenied: {fileID: 0}
-  m_buttonSelection: {fileID: 0}
-  m_delayBetweenTransitions: 0
+  m_winSound: {fileID: 8300000, guid: cf4e98c49c915dc4eac9a3665076f2d9, type: 3}
+  m_lossSound: {fileID: 8300000, guid: 8a1ae817322fa08418015a6537f03747, type: 3}
+  m_buttonBack: {fileID: 8300000, guid: 8db217cd2bbfdde40b0e0675a4b9522d, type: 3}
+  m_buttonSelected: {fileID: 8300000, guid: d02e8073ff22c6540a961eb98068ab57, type: 3}
+  m_buttonDenied: {fileID: 8300000, guid: 8747496afe687cd429cd33509ca93d86, type: 3}
+  m_buttonSelection: {fileID: 8300000, guid: 4a5c14606ab75a94d941f1edf7788698, type: 3}
+  ButtonSoundVolume: 0.3
