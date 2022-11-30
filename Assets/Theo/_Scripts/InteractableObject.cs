@@ -16,6 +16,9 @@ public class InteractableObject : MonoBehaviour
 {
     [SerializeField] private GameObject m_target;
 
+    [Tooltip("Set the position of the target if Active is chosen. Default to Vector3.zero to skip that functionality.")]
+    [SerializeField] private Vector3 m_setTargetPosition;
+
     private bool m_triggerInput;
     private float m_triggerInputCooldown = 0.3f;
     private bool m_isPlayerColliding;
@@ -82,7 +85,6 @@ public class InteractableObject : MonoBehaviour
             if (m_triggerInput)
             {
                 m_triggerInput = false;
-                //ExplodeTarget(m_target);
 
                 Interaction?.Invoke(m_target);
             }
@@ -111,6 +113,18 @@ public class InteractableObject : MonoBehaviour
 
     private void ActivateTarget(GameObject target)
     {
+        if(m_setTargetPosition != Vector3.zero)
+        {
+            target.transform.position = m_setTargetPosition;
+        }
+
+        var unit = target.GetComponent<Unit>();
+
+        if (unit != null)
+        {
+            Grid.Instance.RegisterUnit(unit);
+        }
+
         target.SetActive(true);
 
         Grid.Instance.BakeNavMesh();
@@ -118,7 +132,9 @@ public class InteractableObject : MonoBehaviour
 
     private void DeactivateTarget(GameObject target)
     {
-        target.SetActive(false);
+        var unit = target.GetComponent<Unit>();
+
+        if (unit != null) unit.RemoveUnit();
 
         Grid.Instance.BakeNavMesh();
     }

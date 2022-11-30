@@ -12,6 +12,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 
 public class DestructableObject : Unit, IPushable
@@ -38,6 +39,8 @@ public class DestructableObject : Unit, IPushable
     [SerializeField] private Hazard m_hazardType;
     [SerializeField] private int m_hazardRadius = 1;
     [SerializeField] private int m_hazardDuration;
+
+    public List<GameObject> Highlights { get; private set; }
 
     override public void Awake()
     {
@@ -110,7 +113,7 @@ public class DestructableObject : Unit, IPushable
     {
         List<Vector2Int> targetTiles = Grid.Instance.GetSurroundingTiles(this.GridPosition, m_damageRadius);
 
-        foreach(Vector2Int tile in targetTiles)
+        foreach (Vector2Int tile in targetTiles)
         {
             Unit target = Grid.Instance.GetUnitAt(tile);
 
@@ -118,7 +121,7 @@ public class DestructableObject : Unit, IPushable
             {
                 target.TakeDamage(m_damageAmount);
             }
-            
+
         }
     }
 
@@ -126,9 +129,10 @@ public class DestructableObject : Unit, IPushable
     {
         m_timer--;
 
-        if(m_timer <= 0)
+        if (m_timer <= 0)
         {
             OnDeath();
         }
     }
+
 }

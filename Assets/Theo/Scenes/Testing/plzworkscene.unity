@@ -5114,14 +5114,6 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 497359922}
     m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_focalPoint
-      value: 
-      objectReference: {fileID: 390949583}
     - target: {fileID: 64037453863699545, guid: e8a64a44bedfda14fad87780ca17df52, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -5240,10 +5232,6 @@ PrefabInstance:
     - target: {fileID: 139447598987904625, guid: 22e8c91a78c817c42843b113620d01a3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 139447598987904627, guid: 22e8c91a78c817c42843b113620d01a3, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 139447598987904638, guid: 22e8c91a78c817c42843b113620d01a3, type: 3}
       propertyPath: m_Name

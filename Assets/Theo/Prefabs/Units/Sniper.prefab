@@ -663,7 +663,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2066169737998390241}
   m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
-  m_LocalPosition: {x: 7, y: 1, z: -11}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -718,7 +718,6 @@ MonoBehaviour:
   m_damage: 1
   m_lockOnSound: {fileID: 8300000, guid: e3ce527d30a84b144837e11cd01c0576, type: 3}
   m_shootSound: {fileID: 8300000, guid: 6040830929d8d7547b2a15a267343d92, type: 3}
-  playerLock: {fileID: 0}
 --- !u!82 &8868811595360171589
 AudioSource:
   m_ObjectHideFlags: 0
