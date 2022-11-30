@@ -16,6 +16,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using TMPro;
 
 public class Player : Entity, IDamagable
 {
@@ -98,6 +99,9 @@ public class Player : Entity, IDamagable
         AbilityButtonManager.Instance.OnMeleeButtonPress += StartMeleeSelection;
         AbilityButtonManager.Instance.OnMindBlastButtonPress += StartMindblast;
         AbilityButtonManager.Instance.OnBlinkButtonPress += StartBlinkAttack;
+
+        m_moveSelecting = false;
+        m_abilitySelecting = false;
     }
 
     public override void TakeDamage(int damage)
@@ -126,6 +130,8 @@ public class Player : Entity, IDamagable
         {
             return;
         }
+
+        //if(m_abilitySelecting || m_moveSelecting) return;
 
         StartCoroutine(MoveSelection());
     }
@@ -253,6 +259,8 @@ public class Player : Entity, IDamagable
             return;
         }
 
+        if (m_abilitySelecting || m_moveSelecting) return;
+
         StartCoroutine(MeleeSelection());
     }
 
@@ -265,7 +273,7 @@ public class Player : Entity, IDamagable
         IDamagable target = null;
         Vector2Int targetPosition = Vector2Int.zero;
 
-        while(!Input.GetKeyDown(KeyCode.Escape))
+        while (!Input.GetKeyDown(KeyCode.Escape))
         {
             // Raycast from cursor to check if whatever cursor is over has IDamagable interface
             RaycastHit hit;
@@ -297,10 +305,10 @@ public class Player : Entity, IDamagable
         }
 
         // If we have a valid target, we will attack it.
-        if (target != null)
+        if (target != null && target != this)
         {
-            ICombatAction melee = new SingleDamageAction(targetPosition, m_meleeDamage, 
-                () => { Animator.SetTrigger("melee"); m_audioSource.PlayOneShot(m_meleeAudio); } );
+            ICombatAction melee = new SingleDamageAction(targetPosition, m_meleeDamage,
+                () => { Animator.SetTrigger("melee"); m_audioSource.PlayOneShot(m_meleeAudio); });
             StartCoroutine(melee.Execute());
 
             // Play attack animation and face towards enemy
@@ -308,11 +316,13 @@ public class Player : Entity, IDamagable
             FaceDirection(dir);
             Animator.SetTrigger("melee");
             m_audioSource.PlayOneShot(m_meleeAudio);
-            
+
 
             // Subtract the cost of the move from the action points.
             m_actionPoints.SpendActionPoints(m_meleeCost);
         }
+
+        m_abilitySelecting = false;
     }
 
     /// <summary>
@@ -326,6 +336,8 @@ public class Player : Entity, IDamagable
             Debug.Log("Not enough action points to perform mindblast.");
             return;
         }
+
+        //if (m_abilitySelecting || m_moveSelecting) return;
 
         StartCoroutine(PerformMindblast());
     }
@@ -401,6 +413,8 @@ public class Player : Entity, IDamagable
             }
         }
 
+        //if (m_abilitySelecting || m_moveSelecting) return;
+
         if (blinkPositions.Count > 0)
             StartCoroutine(BlinkSelection(blinkPositions));
     }
@@ -413,10 +427,12 @@ public class Player : Entity, IDamagable
     /// <returns></returns>
     private IEnumerator BlinkSelection(Dictionary<Direction, Vector2Int> blinkPositions)
     {
+        m_abilitySelecting = true;
+
         //Debug.Log(blinkPositions.Values.Count);
 
         // Start by creating green highlights at all valid blink positions.
-        List<GameObject> highlights = new List<GameObject>();        
+        List<GameObject> highlights = new List<GameObject>();
         foreach (Vector2Int pos in blinkPositions.Values)
         {
             // Cache the highlight for easy removal later
@@ -479,6 +495,8 @@ public class Player : Entity, IDamagable
             ICombatAction damage = new SingleDamageAction(damagePosition, m_blinkDamage);
             StartCoroutine(damage.Execute());
         }
+
+        m_abilitySelecting = false;
     }
 
     #endregion
