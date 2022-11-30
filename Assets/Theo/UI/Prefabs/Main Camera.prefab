@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 64037453863699545}
   - component: {fileID: 64037453863699550}
   - component: {fileID: 64037453863699551}
-  - component: {fileID: 64037453863699544}
   - component: {fileID: 64037453863699546}
   - component: {fileID: 64037453863699547}
   m_Layer: 0
@@ -87,24 +86,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 64037453863699548}
   m_Enabled: 1
---- !u!114 &64037453863699544
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 64037453863699548}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf5571cd229d51445b667d699c0bb471, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_focalPoint: {fileID: 0}
-  m_sensitivity: 1.5
-  m_zoomSpeed: 75
-  m_zoomLerp: 0.1
-  m_moveSpeed: 3.5
-  m_lerpSpeed: 0.1
 --- !u!82 &64037453863699546
 AudioSource:
   m_ObjectHideFlags: 0
@@ -223,3 +204,4 @@ MonoBehaviour:
   m_buttonSelected: {fileID: 0}
   m_buttonDenied: {fileID: 0}
   m_buttonSelection: {fileID: 0}
+  m_delayBetweenTransitions: 0

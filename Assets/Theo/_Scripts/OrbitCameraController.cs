@@ -8,6 +8,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR;
 
@@ -82,19 +83,11 @@ public class OrbitCameraController : MonoBehaviour
         // Zoom camera
         float scroll = Input.GetAxis("Mouse ScrollWheel");
 
-        if (cam.orthographic)
-        {
-            cam.orthographicSize += scroll * -m_zoomSpeed * Time.deltaTime;
-        }
-        else
-        {
-            var fov = cam.fieldOfView;
+        var desiredSize = cam.orthographicSize;
 
-            fov += scroll * -m_zoomSpeed;
+        desiredSize += scroll * -m_zoomSpeed * Time.deltaTime;
 
-            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fov, m_zoomLerp);
-        }
-
+        cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, desiredSize, m_zoomLerp);
 
     }
 

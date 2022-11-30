@@ -51,6 +51,9 @@ public class Player : Entity, IDamagable
     [SerializeField] private Color m_validColor;
     [SerializeField] private Color m_invalidColor;
 
+    private bool m_moveSelecting;
+    private bool m_abilitySelecting;
+
 
     // AP
     private ActionPoints m_actionPoints;
@@ -134,7 +137,8 @@ public class Player : Entity, IDamagable
     /// <returns></returns>
     private IEnumerator MoveSelection()
     {
-        
+
+        m_moveSelecting = true;
 
         LineRenderer lineRenderer = CreateLineRenderer();
 
@@ -145,7 +149,7 @@ public class Player : Entity, IDamagable
 
         while (!Input.GetKeyDown(KeyCode.Mouse0) && !Input.GetKeyDown(KeyCode.Escape))
         {
-            
+
             // First get the grid position that mouse is currently looking at.
             Vector2Int mousePosition = GetCursorGridPosition();
 
@@ -195,6 +199,7 @@ public class Player : Entity, IDamagable
         // If the player clicked and not pressed escape, and the path is valid, move the player.
         if (isValid && !Input.GetKeyDown(KeyCode.Escape))
         {
+
             // Set animator to running
             Animator.SetBool("moving", true);
 
@@ -211,14 +216,16 @@ public class Player : Entity, IDamagable
             // Stop running animation
             Animator.SetBool("moving", false);
         }
-        
-        
+
+
         else
         {
             // Clean up linerenderer after
             Destroy(lineRenderer.gameObject);
             m_preview.Hide();
         }
+
+        m_moveSelecting = false;
     }
 
     /// <summary>
@@ -251,6 +258,8 @@ public class Player : Entity, IDamagable
 
     private IEnumerator MeleeSelection()
     {
+        m_abilitySelecting = true;
+
         // By default, have no target. We will use null to check
         // if valid target is chosen when the player clicks.
         IDamagable target = null;
