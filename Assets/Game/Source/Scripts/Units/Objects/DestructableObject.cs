@@ -75,6 +75,7 @@ public class DestructableObject : Enemy, IPushable
         if (m_destroyOnTimer)
         {
             m_timerObject.SetActive(true);
+            m_timerObject.GetComponentInChildren<TMP_Text>().text = m_timer.ToString();
             BattleManager.Instance.OnRoundStart += TimerCopuntdown;
         }
                     
@@ -130,16 +131,6 @@ public class DestructableObject : Enemy, IPushable
                 EnvironmentHazard.CreateHazard(m_hazardType, m_hazardDuration, tile);
             }
         }
-
-        //foreach (Vector2Int tile in surroundingTiles)
-        //{
-        //    if (Grid.Instance.IsReachable(GridPosition, tile))
-        //    {
-        //        EnvironmentHazard.CreateHazard(m_hazardType, m_hazardDuration, tile);
-        //    }
-
-
-        //}
     }
 
     private void DealDamage()

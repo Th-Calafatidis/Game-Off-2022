@@ -57,13 +57,13 @@ MonoBehaviour:
   m_lines: []
   Range: 1
   m_destroyOnTimer: 0
-  m_timer: 0
+  m_timer: 1
   m_dealDamage: 0
   m_damageAmount: 0
-  m_pushable: 0
+  m_pushable: 1
   m_createHazard: 1
   m_hazardType: 1
-  m_hazardDuration: 1
+  m_hazardDuration: 2
 --- !u!65 &1664040033159482540
 BoxCollider:
   m_ObjectHideFlags: 0
