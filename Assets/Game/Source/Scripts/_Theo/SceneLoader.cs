@@ -45,27 +45,33 @@ public class SceneLoader : MonoBehaviour
         if (BattleManager.Instance.GetEnemyCount() == 0 && !m_levelFinished)
         {
 
-            if (SceneManager.GetActiveScene().buildIndex == 10) // Put final scene index here
+            if (SceneManager.GetActiveScene().buildIndex == 6) // Put final scene index here
             {
                 OnGameFinished?.Invoke();
 
                 // Dostuff here when game finishes.
-
+                m_announcement.Announce("Game Completed", 4f);
+                m_audioSource.Stop();
+                m_audioSource.clip = null;
+                m_audioSource.PlayOneShot(AudioManager.Instance.WinSound);
             }
+            else
+            {
+                OnSceneLoaded?.Invoke();
 
-            OnSceneLoaded?.Invoke();
 
+                m_levelFinished = true;
+                m_announcement.Announce("Level Complete", 4f);
+                m_announcement.AnnounceStageCleared(4f);
 
-            m_levelFinished = true;
-            m_announcement.Announce("Level Complete", 4f);
-            m_announcement.AnnounceStageCleared(4f);
+                OnStageCleared?.Invoke();
 
-            OnStageCleared?.Invoke();
-
-            m_audioSource.Stop();
-            m_audioSource.clip = null;
-            m_audioSource.PlayOneShot(AudioManager.Instance.WinSound);
-            this.Invoke(Utility.LoadNextScene, 4f);
+                m_audioSource.Stop();
+                m_audioSource.clip = null;
+                m_audioSource.PlayOneShot(AudioManager.Instance.WinSound);
+                this.Invoke(Utility.LoadNextScene, 4f);
+            }
+            
 
         }
 
