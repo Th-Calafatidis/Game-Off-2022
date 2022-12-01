@@ -271,6 +271,11 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &710635696 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 782398652841290253, guid: b05e96aa7cc6d6142b981afbbfe8c94d, type: 3}
+  m_PrefabInstance: {fileID: 782398652164584880}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &772560579
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,6 +315,11 @@ RectTransform:
   m_AnchoredPosition: {x: -80, y: 82}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1369816953 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4970911387289994216, guid: 5ba93f36f866ab142b5cc0a476c710c6, type: 3}
+  m_PrefabInstance: {fileID: 4970911387926630359}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1394143838
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,9 +727,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_topMenu: {fileID: 772560579}
   m_backButton: {fileID: 1435903827}
-  m_playButton: {fileID: 0}
-  m_optionsButton: {fileID: 0}
-  m_exitButton: {fileID: 0}
+  m_playButton: {fileID: 1925463140}
+  m_optionsButton: {fileID: 710635696}
+  m_exitButton: {fileID: 1369816953}
 --- !u!4 &1614720096
 Transform:
   m_ObjectHideFlags: 0
@@ -728,7 +738,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1614720094}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 466.84573, y: 272.28555, z: 11.838346}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -813,6 +823,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1914869407}
   m_CullTransparentMesh: 1
+--- !u!1 &1925463140 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 360336774028533474, guid: fe25478ab004c474abc5bc1e4a14158e, type: 3}
+  m_PrefabInstance: {fileID: 360336775583697595}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2090340795
 GameObject:
   m_ObjectHideFlags: 0
@@ -923,7 +938,7 @@ MonoBehaviour:
   m_buttonSelected: {fileID: 8300000, guid: d02e8073ff22c6540a961eb98068ab57, type: 3}
   m_buttonDenied: {fileID: 8300000, guid: 8747496afe687cd429cd33509ca93d86, type: 3}
   m_buttonSelection: {fileID: 8300000, guid: 4a5c14606ab75a94d941f1edf7788698, type: 3}
-  ButtonSoundVolume: 0
+  ButtonSoundVolume: 0.3
 --- !u!82 &2090340800
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1244,6 +1259,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2090340799}
     - target: {fileID: 782398652930624978, guid: b05e96aa7cc6d6142b981afbbfe8c94d, type: 3}
+      propertyPath: m_text
+      value: MANUAL
+      objectReference: {fileID: 0}
+    - target: {fileID: 782398652930624978, guid: b05e96aa7cc6d6142b981afbbfe8c94d, type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: 30a38892c642e4e45b2e8d6899aa311d, type: 2}
@@ -1393,6 +1412,10 @@ PrefabInstance:
     - target: {fileID: 2703899741899756920, guid: c6155662e1b01e14cb6c0f6e74f2abde, type: 3}
       propertyPath: m_Name
       value: Credits Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 2703899741899756920, guid: c6155662e1b01e14cb6c0f6e74f2abde, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
