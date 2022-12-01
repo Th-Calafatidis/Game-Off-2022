@@ -24,7 +24,7 @@ public class Grid : MonoBehaviour
 
     // Navmesh for pathfinder and accessing nodes.
     private NewGridNavMesh m_navmesh;
-    
+
     // Pathfinder object used for navigation on the grid.
     private Pathfinder m_pathfinder;
 
@@ -267,7 +267,7 @@ public class Grid : MonoBehaviour
         Node nodeAtPosition = m_navmesh.GetNodeAt(worldPosition);
         if (nodeAtPosition == null)
             return Vector2Int.zero;
-        
+
         return nodeAtPosition.GridPosition;
     }
 
@@ -290,7 +290,7 @@ public class Grid : MonoBehaviour
             // In case there is no path found.
             return null;
         }
-        
+
         List<Vector2Int> path = Node.ConvertToPositions(pathNodes);
 
         return path;
@@ -481,13 +481,13 @@ public class Grid : MonoBehaviour
 
         int w = x2 - x;
         int h = y2 - y;
-        
+
         int dx1 = 0, dy1 = 0, dx2 = 0, dy2 = 0;
         if (w < 0) dx1 = -1; else if (w > 0) dx1 = 1;
         if (h < 0) dy1 = -1; else if (h > 0) dy1 = 1;
         if (w < 0) dx2 = -1; else if (w > 0) dx2 = 1;
 
-        
+
         int longest = Math.Abs(w);
         int shortest = Math.Abs(h);
         if (!(longest > shortest))
@@ -661,6 +661,21 @@ public class Grid : MonoBehaviour
         }
 
         return units;
+    }
+
+    public List<Enemy> GetEnemies()
+    {
+        List<Enemy> enemies = new List<Enemy>();
+        foreach (KeyValuePair<Unit, Vector2Int> unit in m_unitRegistry)
+        {
+            if (unit.Key is Enemy && !unit.Key.GetComponent<DestructableObjectEnemy>())
+            {
+                var enemy = unit.Key.GetComponent<Enemy>();
+                enemies.Add(enemy);
+            }
+        }
+
+        return enemies;
     }
 
     #endregion

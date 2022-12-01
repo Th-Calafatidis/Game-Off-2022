@@ -22,12 +22,6 @@ public class GameTimer : MonoBehaviour
     private TMP_Text m_totalDeathText;
     private TMP_Text m_totalTimeText;
 
-    //Total Counter
-    private float m_totalGameTime;
-    private int m_totalDeaths;
-    private int m_totalTurns;
-
-
     // Level Counters
     private float m_levelTimer;
     private float m_levelTimerCounter;
@@ -37,10 +31,6 @@ public class GameTimer : MonoBehaviour
     private GameObject m_finalScreen;
     private GameObject m_stageCleared;
 
-    private bool m_levelFinished;
-
-    private static GameTimer m_instance;
-
     private void Start()
     {
 
@@ -49,7 +39,7 @@ public class GameTimer : MonoBehaviour
         SceneLoader.Instance.OnSceneLoaded += ResetCounters;
         SceneLoader.Instance.OnSceneLoaded += ResetOnCleared;
 
-        SceneLoader.Instance.OnSceneRestarted += DeathCounterUpdate;
+        //SceneLoader.Instance.OnSceneRestarted += DeathCounterUpdate;
 
         SceneLoader.Instance.OnStageCleared += DisplayClearedTimer;
         SceneLoader.Instance.OnStageCleared += DisplayClearedDeaths;
@@ -74,7 +64,6 @@ public class GameTimer : MonoBehaviour
         m_finalScreen = GameObject.Find("FinalScreen");
         m_finalScreen.SetActive(false);
 
-        m_levelFinished = false;
 
         Debug.Log("Total Game Time: " + TotalCounterData.Instance.TotalTime);
         Debug.Log("Total Turns: " + TotalCounterData.Instance.TotalTurns);
@@ -96,13 +85,11 @@ public class GameTimer : MonoBehaviour
     {
         
 
-        m_totalGameTime += m_levelTimerCounter;
+        //m_totalGameTime += m_levelTimerCounter;
 
         m_levelTimer = 0f;
         m_levelTimerCounter = 0f;
         m_turnCounter = 0;
-
-        m_levelFinished = false;
 
 
     }
@@ -129,10 +116,10 @@ public class GameTimer : MonoBehaviour
         m_turnCounter++;
     }
 
-    private void DeathCounterUpdate()
-    {
-        m_levelDeathCounter ++ ;
-    }
+    //private void DeathCounterUpdate()
+    //{
+    //    m_levelDeathCounter ++ ;
+    //}
 
     #endregion
 
@@ -164,11 +151,11 @@ public class GameTimer : MonoBehaviour
 
     private void DisplayClearedDeaths()
     {
-        TotalCounterData.Instance.TotalDeaths += m_levelDeathCounter;
+        //TotalCounterData.Instance.TotalDeaths += m_levelDeathCounter;
 
-        m_deathClearCounter.text = "DEATHS: " + m_levelDeathCounter.ToString();
+        m_deathClearCounter.text = "DEATHS: " + TotalCounterData.Instance.LevelDeaths.ToString();
 
-        m_levelDeathCounter = 0;
+        //m_levelDeathCounter = 0;
     }
 
     private void DisplayClearedTurns()

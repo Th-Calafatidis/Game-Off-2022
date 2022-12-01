@@ -42,7 +42,7 @@ public class SceneLoader : MonoBehaviour
     private void Update()
     {
 
-        if (BattleManager.Instance.GetEnemyCount() == 0 && !m_levelFinished)
+        if (Grid.Instance.GetEnemies().Count == 0 && !m_levelFinished)
         {
 
             if (SceneManager.GetActiveScene().buildIndex == 6) // Put final scene index here
@@ -62,13 +62,14 @@ public class SceneLoader : MonoBehaviour
                 m_announcement.Announce("Level Complete", 4f);
                 m_announcement.AnnounceStageCleared(4f);
 
-                
+
                 OnStageCleared?.Invoke();
 
                 m_audioSource.Stop();
                 m_audioSource.clip = null;
                 m_audioSource.PlayOneShot(AudioManager.Instance.WinSound);
                 this.Invoke(Utility.LoadNextScene, 4f);
+                TotalCounterData.Instance.LevelDeaths = 0;
                 
             }
 
@@ -80,6 +81,7 @@ public class SceneLoader : MonoBehaviour
 
             m_levelFinished = true;
             TotalCounterData.Instance.TotalDeaths++;
+            TotalCounterData.Instance.LevelDeaths++;
             m_announcement.Announce("You Died", 4f);
             m_audioSource.Stop();
             m_audioSource.clip = null;
