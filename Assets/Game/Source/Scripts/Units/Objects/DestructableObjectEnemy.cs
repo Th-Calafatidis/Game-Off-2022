@@ -33,8 +33,15 @@ public class DestructableObjectEnemy : Enemy, IPushable
     [SerializeField] private Hazard m_hazardType;
     [SerializeField] private int m_hazardDuration;
 
-    private List<Vector2Int> surroundingTiles;
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip m_explosionSound;
 
+    [Header("Particles")]
+    [SerializeField] private GameObject m_deathParticles;
+    [SerializeField] private GameObject m_textParticles;
+
+
+    private List<Vector2Int> surroundingTiles;
     private Enemy m_enemy;
     private GameObject m_timerObject;
 
@@ -50,6 +57,7 @@ public class DestructableObjectEnemy : Enemy, IPushable
         m_enemy = GetComponent<Enemy>();
         m_timerObject = transform.Find("TimerIcon").gameObject;
         m_timerObject.SetActive(false);
+
 
         if (m_enemy.DestroyDelay == 0) m_enemy.DestroyDelay = 0.01f;
     }
@@ -99,6 +107,13 @@ public class DestructableObjectEnemy : Enemy, IPushable
 
     public override void OnDeath()
     {
+
+
+        Instantiate(m_deathParticles, this.transform.position, Quaternion.identity);
+        Instantiate(m_textParticles, new Vector3(transform.position.x, 2f, transform.position.y), Quaternion.identity);
+
+        PlaySound(m_explosionSound);
+
         base.OnDeath();
 
         if (m_createHazard)
@@ -106,6 +121,8 @@ public class DestructableObjectEnemy : Enemy, IPushable
 
         if (m_dealDamage)
             DealDamage();
+
+        
 
         m_enemy.ClearHighlights();
 

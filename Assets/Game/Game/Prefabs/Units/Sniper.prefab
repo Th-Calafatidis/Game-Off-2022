@@ -723,6 +723,10 @@ MonoBehaviour:
   m_shootSound: {fileID: 8300000, guid: 6040830929d8d7547b2a15a267343d92, type: 3}
   m_hitSound: {fileID: 8300000, guid: 125748d809bae574489c8328775b1c5b, type: 3}
   m_deathSound: {fileID: 8300000, guid: 231a804aad4bb6e4e8d3e2082868e917, type: 3}
+  m_lockParticles: {fileID: 4026580418142986748, guid: b0a73bfd90b77ff4cb1070829b3b797f, type: 3}
+  m_shootParticles: {fileID: 1429954232896169633, guid: 83036083a4ebcd34f98131bd3cf6f4d2, type: 3}
+  m_textParticles: {fileID: 6410614722063539292, guid: 257cb8d8a711dac42af8602ba9799e5d, type: 3}
+  m_deathParticles: {fileID: 5985634496115995773, guid: 463cf9f7af4680240898f6aeba3fe3e6, type: 3}
 --- !u!82 &8868811595360171589
 AudioSource:
   m_ObjectHideFlags: 0

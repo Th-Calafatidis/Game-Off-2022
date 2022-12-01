@@ -43,6 +43,14 @@ public class DestroyerEnemy : Enemy
     [SerializeField] private AudioClip m_hitSound;
     [SerializeField] private AudioClip m_deathSound;
 
+    [Header("Particles")]
+    [SerializeField] private GameObject m_fistParticles;
+    [SerializeField] private GameObject m_chargeParticles;
+    [SerializeField] private GameObject m_toxicCloudParticles;
+    [SerializeField] private GameObject m_deathParticles;
+    [SerializeField] private GameObject m_textChargeParticles;
+    [SerializeField] private GameObject m_textFistParticles;
+
 
     public override void Awake()
     {
@@ -94,23 +102,34 @@ public class DestroyerEnemy : Enemy
         CreateHighlight(Grid.Instance.GetTilesBetween(GridPosition, endPosition), Color.red);
 
         ICombatAction charge = new ChargeAction(this, endPosition, m_chargeDamage, m_chargeKnockback, m_chargeSpeed,
-            () => { Animator.SetBool("chargeset", false); Animator.SetTrigger("chargego"); m_audioSource.PlayOneShot(m_chargeLaunchSound); } );
+            () => { Animator.SetBool("chargeset", false); Animator.SetTrigger("chargego"); m_audioSource.PlayOneShot(m_chargeLaunchSound); }, 
+            ()=> { Instantiate(m_textFistParticles, new Vector3(transform.position.x, 2f, transform.position.z), Quaternion.identity);
+                Instantiate(m_fistParticles, transform.position, Quaternion.identity);
+            });
         SetAction(charge);
+
+        Instantiate(m_chargeParticles, transform.position, Quaternion.identity);
+        Instantiate(m_textChargeParticles, new Vector3(transform.position.x, 2f, transform.position.z), Quaternion.identity);
 
         SetLine("charge", m_chargeDamage);
     }
 
     private void Fist()
-    {
+    {        
+
         // Performs melee attack where player currently is.
         Direction direction = Grid.Instance.GetDirectionTo(GetPlayer().GridPosition, GridPosition);
         Vector2Int attackPosition = Grid.Instance.PositionWithDirection(GridPosition, direction);
+        transform.LookAt(Grid.Instance.GetWorldPosition(attackPosition.x, attackPosition.y));
 
         CreateHighlight(attackPosition, Color.red);
 
         ICombatAction damage = new SingleDamageAction(attackPosition, m_fistDamage,
-            () => { Animator.SetTrigger("melee"); m_audioSource.PlayOneShot(m_ironFistSound); });
-        SetAction(damage);
+            () => { Animator.SetTrigger("melee"); m_audioSource.PlayOneShot(m_ironFistSound);  
+                Instantiate(m_textFistParticles, new Vector3(transform.position.x, 2f, transform.position.z), Quaternion.identity);
+                Instantiate(m_fistParticles, transform.position, Quaternion.identity);
+            });
+        SetAction(damage);        
 
         SetLine("fist", m_fistDamage);
 
@@ -127,6 +146,8 @@ public class DestroyerEnemy : Enemy
         ICombatAction hazardCreation = new CreateHazardAction(targetTiles, m_grenadeHazardType, m_grenadeHazardDuration,
             () => { Animator.SetTrigger("toxicblast"); m_audioSource.PlayOneShot(m_toxicBlastLaunchSound); });
         SetAction(hazardCreation);
+
+        Instantiate(m_toxicCloudParticles, Grid.Instance.GetWorldPosition(targetTiles[0].x, targetTiles[0].y), Quaternion.identity);
 
         SetLine("grenade");
     }
@@ -231,5 +252,6 @@ public class DestroyerEnemy : Enemy
         //Play animation and sfx
         Animator.SetTrigger("death");
         PlaySound(m_deathSound);
+        Instantiate(m_deathParticles, new Vector3(transform.position.x, 1.5f, transform.position.y), Quaternion.identity);
     }
 }

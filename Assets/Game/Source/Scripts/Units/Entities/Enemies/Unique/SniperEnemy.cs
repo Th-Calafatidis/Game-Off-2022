@@ -26,6 +26,12 @@ public class SniperEnemy : Enemy
     [SerializeField] private AudioClip m_hitSound;
     [SerializeField] private AudioClip m_deathSound;
 
+    [Header("Particles")]
+    [SerializeField] private GameObject m_lockParticles;
+    [SerializeField] private GameObject m_shootParticles;
+    [SerializeField] private GameObject m_textParticles;
+    [SerializeField] private GameObject m_deathParticles;
+
     public int MaxRange { get { return m_maxRange; } }
 
     private bool m_actionLocked;
@@ -61,8 +67,12 @@ public class SniperEnemy : Enemy
         }
 
         // Create the action
-        ICombatAction targetedShot = new TargetedShotAction(this, m_damage, () => { PlaySound(m_shootSound); transform.LookAt(GetPlayer().transform); }, 
-            () => {Animator.SetBool("isAiming", false); Animator.SetTrigger("isShooting"); });
+        ICombatAction targetedShot = new TargetedShotAction(this, m_damage, 
+            () => { PlaySound(m_shootSound); transform.LookAt(GetPlayer().transform); Instantiate(m_lockParticles, transform.position, Quaternion.identity); }, 
+            () => {Animator.SetBool("isAiming", false); Animator.SetTrigger("isShooting"); 
+                Instantiate(m_shootParticles, transform.position, Quaternion.identity); 
+                Instantiate(m_textParticles, new Vector3(transform.position.x, 2f, transform.position.y), Quaternion.identity);
+            });
         SetAction(targetedShot);
 
         m_actionLocked = true;
@@ -88,6 +98,8 @@ public class SniperEnemy : Enemy
 
     public override void OnDeath()
     {
+        Instantiate(m_deathParticles, new Vector3(transform.position.x, 1.5f, transform.position.y), Quaternion.identity);
+
         m_actionLocked = false;
         playerLockIcon.SetActive(false);
 

@@ -34,12 +34,14 @@ public class Player : Entity, IDamagable
     [SerializeField] private int m_meleeRange;
     [SerializeField] private int m_meleeDamage;
     [SerializeField] private AudioClip m_meleeAudio;
+    [SerializeField] private GameObject m_meleeParticles;
 
     [Header("Mind blast")]
     [SerializeField] private int m_mindBlastCost;
     [SerializeField] private int m_mindBlastPushForce;
     [SerializeField] private float m_mindBlastWindupDelay;
     [SerializeField] private AudioClip m_mindBlastAudio;
+    [SerializeField] private GameObject m_mindBlastParticles;
 
     [Header("Blink")]
     [SerializeField] private int m_blinkCost;
@@ -47,6 +49,7 @@ public class Player : Entity, IDamagable
     [SerializeField] private int m_blinkDamage;
     [SerializeField] private float m_blinkWindupDelay;
     [SerializeField] private AudioClip m_blinkAudio;
+    [SerializeField] private GameObject m_blinkParticles;
 
     [Header("Generic Audio")]
     [SerializeField] private AudioClip m_hitSound;
@@ -57,8 +60,12 @@ public class Player : Entity, IDamagable
     [SerializeField] private Color m_validColor;
     [SerializeField] private Color m_invalidColor;
 
+    [Header("Generic Particles")]
+    [SerializeField] private GameObject m_hitParticles;
+
     private bool m_moveSelecting;
     private bool m_abilitySelecting;
+    private Vector3 m_particlePos;
 
 
     // AP
@@ -116,6 +123,7 @@ public class Player : Entity, IDamagable
         m_health.Damage(damage);
         m_animator.SetTrigger("hit");
         m_audioSource.PlayOneShot(m_hitSound);
+        Instantiate(m_hitParticles, transform.position, Quaternion.identity);
     }
 
     public void RestoreAP()
@@ -308,6 +316,9 @@ public class Player : Entity, IDamagable
                     // We need to make sure that target is within 1 tile.
                     Vector2Int playerPos = Grid.Instance.GetGridPosition(transform.position);
                     Vector2Int targetPos = Grid.Instance.GetGridPosition(hit.point);
+
+                    m_particlePos = hit.point;
+
                     int distance = Grid.Instance.GetManhattenDistance(playerPos, targetPos);
 
                     if (distance <= m_meleeRange)
@@ -332,6 +343,8 @@ public class Player : Entity, IDamagable
             ICombatAction melee = new SingleDamageAction(targetPosition, m_meleeDamage,
                 () => { Animator.SetTrigger("melee"); m_audioSource.PlayOneShot(m_meleeAudio); });
             StartCoroutine(melee.Execute());
+
+            Instantiate(m_meleeParticles, m_particlePos, Quaternion.identity);
 
             // Play attack animation and face towards enemy
             Direction dir = Grid.Instance.GetDirectionTo(targetPosition, GridPosition);
@@ -379,6 +392,8 @@ public class Player : Entity, IDamagable
         m_audioSource.PlayOneShot(m_mindBlastAudio);
         Animator.SetTrigger("mindBlast");
         yield return new WaitForSeconds(m_mindBlastWindupDelay);
+
+        Instantiate(m_mindBlastParticles, transform.position, Quaternion.identity);
 
         // Check for units above, below, right and left of player
         Vector2Int playerPos = Grid.Instance.GetGridPosition(transform.position);
@@ -531,6 +546,9 @@ public class Player : Entity, IDamagable
             Vector2Int damagePosition = Grid.Instance.PositionWithDirection(chosenPosition, chosenDirection);
             ICombatAction damage = new SingleDamageAction(damagePosition, m_blinkDamage);
             StartCoroutine(damage.Execute());
+
+            if(Grid.Instance.GetUnitAt(damagePosition) != null)
+            Instantiate(m_blinkParticles, Grid.Instance.GetWorldPosition(damagePosition.x, damagePosition.y), Quaternion.identity);
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))

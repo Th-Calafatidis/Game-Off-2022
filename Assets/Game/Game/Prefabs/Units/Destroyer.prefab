@@ -2670,6 +2670,12 @@ MonoBehaviour:
   m_toxicBlastExplosionSound: {fileID: 8300000, guid: 7f466a08733f44344856b0619489994f, type: 3}
   m_hitSound: {fileID: 8300000, guid: 7000eca4f2f4619428196fe2abbac614, type: 3}
   m_deathSound: {fileID: 8300000, guid: f9b96a287dc556548a9d7369640ce269, type: 3}
+  m_fistParticles: {fileID: 5880797563127281583, guid: 265d3a5ba69981a4698ceabcedf368b0, type: 3}
+  m_chargeParticles: {fileID: 1429954232896169633, guid: 83036083a4ebcd34f98131bd3cf6f4d2, type: 3}
+  m_toxicCloudParticles: {fileID: 4425129568585013132, guid: bbeeb0ddc21369746aaaae5c5c1c09cf, type: 3}
+  m_deathParticles: {fileID: 5985634496115995773, guid: 463cf9f7af4680240898f6aeba3fe3e6, type: 3}
+  m_textChargeParticles: {fileID: 6889676053574524597, guid: 1244a9e4f6193654989497ad418a287b, type: 3}
+  m_textFistParticles: {fileID: 119183615461286708, guid: 141e1779869c79845bd243610f187f47, type: 3}
 --- !u!65 &506420314
 BoxCollider:
   m_ObjectHideFlags: 0

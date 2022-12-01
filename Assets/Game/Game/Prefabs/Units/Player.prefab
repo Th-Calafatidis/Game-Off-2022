@@ -4954,20 +4954,24 @@ MonoBehaviour:
   m_meleeRange: 1
   m_meleeDamage: 1
   m_meleeAudio: {fileID: 8300000, guid: 26aad0cc546fb07458a367c4617d8c14, type: 3}
+  m_meleeParticles: {fileID: 8525990746615576120, guid: b85d21f3b8fed714bacf0c4fd50fa512, type: 3}
   m_mindBlastCost: 3
   m_mindBlastPushForce: 3
-  m_mindBlastWindupDelay: 0.6
+  m_mindBlastWindupDelay: 0.75
   m_mindBlastAudio: {fileID: 8300000, guid: f4b446cf77c80f643bcbc07db5d8bd15, type: 3}
+  m_mindBlastParticles: {fileID: 2708598583397607911, guid: 6398d43fe79ea0140913dc5530c646af, type: 3}
   m_blinkCost: 3
   m_blinkDistance: 3
   m_blinkDamage: 1
   m_blinkWindupDelay: 0
   m_blinkAudio: {fileID: 8300000, guid: 6b16d6e1d9000654b8ee7c3dfc4384c1, type: 3}
+  m_blinkParticles: {fileID: 1141330259687333427, guid: 6718dc24203da53468af9ada8fef7d6d, type: 3}
   m_hitSound: {fileID: 8300000, guid: 125748d809bae574489c8328775b1c5b, type: 3}
   m_deathSound: {fileID: 8300000, guid: 231a804aad4bb6e4e8d3e2082868e917, type: 3}
   m_width: 0.15
   m_validColor: {r: 0, g: 1, b: 0.19265246, a: 0.5882353}
   m_invalidColor: {r: 1, g: 0, b: 0, a: 0.5882353}
+  m_hitParticles: {fileID: 4553287630450876385, guid: 15483e51212e3d74886ea57291f4639a, type: 3}
   LockIcon: {fileID: 539934008526325146}
 --- !u!65 &139447598987904627
 BoxCollider:

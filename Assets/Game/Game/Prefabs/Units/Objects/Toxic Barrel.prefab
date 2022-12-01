@@ -33,7 +33,7 @@ Transform:
   - {fileID: 277169981624885714}
   - {fileID: 3286308280630350346}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2740926079272813167
 MonoBehaviour:
@@ -69,6 +69,9 @@ MonoBehaviour:
   m_createHazard: 1
   m_hazardType: 1
   m_hazardDuration: 2
+  m_explosionSound: {fileID: 8300000, guid: 29e3f434582d46d4294b28a15d4803cd, type: 3}
+  m_deathParticles: {fileID: 4425129568585013132, guid: bbeeb0ddc21369746aaaae5c5c1c09cf, type: 3}
+  m_textParticles: {fileID: 214598457478929575, guid: 74269b5d74fe247458a2f20799c27450, type: 3}
 --- !u!65 &1664040033159482540
 BoxCollider:
   m_ObjectHideFlags: 0
