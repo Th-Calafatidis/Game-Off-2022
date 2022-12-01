@@ -20,6 +20,8 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private GameObject m_playButton;
     [SerializeField] private GameObject m_optionsButton;
     [SerializeField] private GameObject m_exitButton;
+    [SerializeField] private GameObject m_helpPanel;
+    [SerializeField] private GameObject m_creditsPanel;
 
     public static MainMenuController Instance { get; private set; }
 
@@ -41,6 +43,7 @@ public class MainMenuController : MonoBehaviour
     public void OpenSettingsMenu()
     {
         m_topMenu.SetActive(false);
+        m_helpPanel.SetActive(true);
         m_backButton.SetActive(true);
     }
 
@@ -52,12 +55,15 @@ public class MainMenuController : MonoBehaviour
     public void OpenCreditsMenu()
     {
         m_topMenu.SetActive(false);
+        m_creditsPanel.SetActive(true);
         m_backButton.SetActive(true);
     }
 
     public void Back()
     {
         m_topMenu.SetActive(true);
+        m_helpPanel.SetActive(false);
+        m_creditsPanel.SetActive(false);
         m_backButton.SetActive(false);
     }
 
