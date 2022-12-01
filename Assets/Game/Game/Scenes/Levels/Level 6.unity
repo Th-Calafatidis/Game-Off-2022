@@ -787,14 +787,6 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 2035028349}
     m_Modifications:
-    - target: {fileID: 6878178865126846097, guid: 82230f3b4aa375f43b8f4b4176127292, type: 3}
-      propertyPath: m_chargeRange
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6878178865126846097, guid: 82230f3b4aa375f43b8f4b4176127292, type: 3}
-      propertyPath: m_grenadeRange
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 6878178865126846110, guid: 82230f3b4aa375f43b8f4b4176127292, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -5179,8 +5171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d51a7ac4ee15f464fa0c9b415d3a22b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_timerText: {fileID: 0}
-  m_turnText: {fileID: 0}
 --- !u!1001 &1378265257
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7806,10 +7796,6 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 2035028349}
     m_Modifications:
-    - target: {fileID: 31721871, guid: 2c5d7ff2351797540a0612ebbbf17830, type: 3}
-      propertyPath: m_timer
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 2269374933712311345, guid: 2c5d7ff2351797540a0612ebbbf17830, type: 3}
       propertyPath: m_Name
       value: ExplosiveMine
@@ -7856,22 +7842,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5215917412384108461, guid: 2c5d7ff2351797540a0612ebbbf17830, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7718091488349924689, guid: 2c5d7ff2351797540a0612ebbbf17830, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7718091488349924689, guid: 2c5d7ff2351797540a0612ebbbf17830, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7718091488349924689, guid: 2c5d7ff2351797540a0612ebbbf17830, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7718091488349924689, guid: 2c5d7ff2351797540a0612ebbbf17830, type: 3}
-      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

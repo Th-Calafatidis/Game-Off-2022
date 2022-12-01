@@ -11,10 +11,14 @@ public class SceneLoader : MonoBehaviour
     private AnnouncementText m_announcement;
     private Player m_player;
     private AudioSource m_audioSource;
+    private GameObject m_stageCleared;
 
     private bool m_levelFinished;
 
     public Action OnSceneLoaded;
+    public Action OnSceneRestarted;
+    public Action OnStageCleared;
+    public Action OnGameFinished;
 
     private void Awake()
     {
@@ -27,6 +31,7 @@ public class SceneLoader : MonoBehaviour
         m_announcement = GameObject.Find("Announcement").GetComponent<AnnouncementText>();
         m_player = GameObject.Find("Player").GetComponent<Player>();
         m_audioSource = Camera.main.GetComponent<AudioSource>();
+        
 
         m_levelFinished = false;
 
@@ -39,10 +44,24 @@ public class SceneLoader : MonoBehaviour
 
         if (BattleManager.Instance.GetEnemyCount() == 0 && !m_levelFinished)
         {
+
+            if (SceneManager.GetActiveScene().buildIndex == 10) // Put final scene index here
+            {
+                OnGameFinished?.Invoke();
+
+                // Dostuff here when game finishes.
+
+            }
+
             OnSceneLoaded?.Invoke();
+
 
             m_levelFinished = true;
             m_announcement.Announce("Level Complete", 4f);
+            m_announcement.AnnounceStageCleared(4f);
+
+            OnStageCleared?.Invoke();
+
             m_audioSource.Stop();
             m_audioSource.clip = null;
             m_audioSource.PlayOneShot(AudioManager.Instance.WinSound);
@@ -52,6 +71,7 @@ public class SceneLoader : MonoBehaviour
 
         else if (m_player.Health.CurrentHealth <= 0 && !m_levelFinished)
         {
+            OnSceneRestarted?.Invoke();
             OnSceneLoaded?.Invoke();
 
             m_levelFinished = true;
@@ -60,7 +80,6 @@ public class SceneLoader : MonoBehaviour
             m_audioSource.clip = null;
             m_audioSource.PlayOneShot(AudioManager.Instance.LossSound);
             this.Invoke(Utility.RestartScene, 4f);
-
         }
     }
 

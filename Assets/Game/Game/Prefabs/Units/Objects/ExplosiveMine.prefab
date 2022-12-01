@@ -164,11 +164,11 @@ MonoBehaviour:
   m_physicalMovementSpeed: 0
   m_displayName: 
   m_actionPriority: 0
-  m_destroyDelay: 0.01
+  DestroyDelay: 0
   m_lines: []
   Range: 1
   m_destroyOnTimer: 1
-  m_timer: 3
+  m_timer: 2
   m_dealDamage: 0
   m_damageAmount: 2
   m_pushable: 1

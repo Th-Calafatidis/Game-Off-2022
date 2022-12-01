@@ -2654,12 +2654,12 @@ MonoBehaviour:
       is enough to posion anyone. Make sure to take a deep breath.
   - Tag: default
     Line: No one will pass. As long i am still standing all intruders will be eliminated!
-  m_chargeRange: 3
+  m_chargeRange: 5
   m_chargeDamage: 1
   m_chargeSpeed: 15
   m_chargeKnockback: 1
   m_fistDamage: 1
-  m_grenadeRange: 5
+  m_grenadeRange: 3
   m_grenadeRadius: 1
   m_grenadeHazardType: 1
   m_grenadeHazardDuration: 2
