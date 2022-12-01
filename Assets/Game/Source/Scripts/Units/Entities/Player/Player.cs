@@ -7,6 +7,7 @@
 //
 // Edited: By Theodore on 26//11/2022
 // Added: Animations and SFX set through the action delegates of each ICombatAction declaration.
+// Fixed bugs with ability selection overlapping each other and abilities triggering all together, and lots of other problems.
 // -----------------------
 // ------------------- */
 
@@ -82,7 +83,7 @@ public class Player : Entity, IDamagable
         get { return m_movementAmount; }
     }
 
-
+    private GameObject m_lockIcon;
 
     public override void Awake()
     {
@@ -106,6 +107,9 @@ public class Player : Entity, IDamagable
 
         m_moveSelecting = false;
         m_abilitySelecting = false;
+
+        m_lockIcon = transform.Find("LockIcon").gameObject;
+        m_lockIcon.SetActive(false);
     }
 
     public override void TakeDamage(int damage)
@@ -141,7 +145,7 @@ public class Player : Entity, IDamagable
             return;
         }
 
-        //if(m_abilitySelecting || m_moveSelecting) return;
+        if (m_moveSelecting) return;
 
         AudioManager.Instance.PlayButtonPressSound();
 

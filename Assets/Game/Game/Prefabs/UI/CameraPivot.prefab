@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf5571cd229d51445b667d699c0bb471, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_allowRotation: 0
   m_focalPoint: {fileID: 0}
   m_sensitivity: 1.5
   m_zoomSpeed: 200
@@ -103,7 +104,7 @@ MeshRenderer:
   m_GameObject: {fileID: 7681941741813135302}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1

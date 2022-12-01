@@ -1,8 +1,10 @@
 // /* --------------------
 // -----------------------
-// Creation date: 06/11/2022
-// Author: Alex
-// Description: Implements a camera controller where the camera rotates around a focus point.
+// Creation date: 29/11/2022
+// Author: Theodore
+// Description: Implements an isometric camera controller with zoom functionality
+//              and a setting to enable rotation around a focus point.
+//
 // -----------------------
 // ------------------- */
 

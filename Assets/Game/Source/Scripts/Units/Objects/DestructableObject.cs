@@ -1,11 +1,9 @@
 // /* --------------------
 // -----------------------
-// Creation date: 14/11/2022
-// Author: Alex
-// Description: This is an object that can be pushed and damaged, as well as being destroyed. Has the option to create hazards.
-// 
-// Edited: Theodore on 27/11/2022
-// Added: DestroyOnTimer, DealDamage, TimerCountdown, CreateHazards, configured the script to function with the new features.
+// Creation date: 27/11/2022
+// Author: Theodore
+// Description: This is a static object enemy that can create hazards, deal AoE damage and explode on a Timer;
+//
 // -----------------------
 // ------------------- */
 
@@ -22,11 +20,6 @@ public class DestructableObject : Enemy, IPushable
     [Header("Destroy On Timer")]
     [SerializeField] private bool m_destroyOnTimer;
     [SerializeField] private int m_timer;
-
-    //[Header("Health")]
-    //[SerializeField] private bool m_damagable;
-    //[SerializeField] private int m_maxHealth;
-    //private Health m_health;
 
     [Header("Damage")]
     [SerializeField] private bool m_dealDamage;

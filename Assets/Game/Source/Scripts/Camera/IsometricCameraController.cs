@@ -13,12 +13,12 @@ using UnityEngine;
 public class IsometricCameraController : MonoBehaviour
 {
     [Header("Camera settings")]
+    [SerializeField] private bool m_allowRotation = true;
     [SerializeField] private Transform m_focalPoint;
     [SerializeField] private float m_sensitivity;
     [SerializeField] private float m_zoomSpeed;
     [SerializeField] private float m_zoomLerp = 0.25f;
     [SerializeField] private float m_moveSpeed = 5f;
-    [SerializeField] private float m_lerpSpeed = 0.25f;
 
     private Vector3 m_input;
     private Camera m_mainCam;
@@ -37,8 +37,11 @@ public class IsometricCameraController : MonoBehaviour
     {
         MoveCamera();
         CursorHiding();
-        Rotation();
         Zooming();
+
+        if (!m_allowRotation) return;
+
+        Rotation();
     }
 
     private void Awake()
