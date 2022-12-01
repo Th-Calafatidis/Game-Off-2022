@@ -58,6 +58,8 @@ public class DestructableObjectEnemy : Enemy, IPushable
     {
         base.Start();
 
+        SetLine("default");
+
         surroundingTiles = Grid.Instance.GetSurroundingTiles(GridPosition, Range);
 
         List<Vector2Int> highlights = new List<Vector2Int>();

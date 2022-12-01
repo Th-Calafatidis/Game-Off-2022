@@ -39,8 +39,6 @@ public class GameTimer : MonoBehaviour
         SceneLoader.Instance.OnSceneLoaded += ResetCounters;
         SceneLoader.Instance.OnSceneLoaded += ResetOnCleared;
 
-        //SceneLoader.Instance.OnSceneRestarted += DeathCounterUpdate;
-
         SceneLoader.Instance.OnStageCleared += DisplayClearedTimer;
         SceneLoader.Instance.OnStageCleared += DisplayClearedDeaths;
         SceneLoader.Instance.OnStageCleared += DisplayClearedTurns;
@@ -63,11 +61,6 @@ public class GameTimer : MonoBehaviour
 
         m_finalScreen = GameObject.Find("FinalScreen");
         m_finalScreen.SetActive(false);
-
-
-        Debug.Log("Total Game Time: " + TotalCounterData.Instance.TotalTime);
-        Debug.Log("Total Turns: " + TotalCounterData.Instance.TotalTurns);
-        Debug.Log("Total Deaths: " + TotalCounterData.Instance.TotalDeaths);
     }
 
     private void Update()
@@ -84,14 +77,9 @@ public class GameTimer : MonoBehaviour
     private void ResetCounters()
     {
         
-
-        //m_totalGameTime += m_levelTimerCounter;
-
         m_levelTimer = 0f;
         m_levelTimerCounter = 0f;
         m_turnCounter = 0;
-
-
     }
 
     private void ResetOnCleared()
@@ -115,11 +103,6 @@ public class GameTimer : MonoBehaviour
     {
         m_turnCounter++;
     }
-
-    //private void DeathCounterUpdate()
-    //{
-    //    m_levelDeathCounter ++ ;
-    //}
 
     #endregion
 
@@ -151,11 +134,9 @@ public class GameTimer : MonoBehaviour
 
     private void DisplayClearedDeaths()
     {
-        //TotalCounterData.Instance.TotalDeaths += m_levelDeathCounter;
 
         m_deathClearCounter.text = "DEATHS: " + TotalCounterData.Instance.LevelDeaths.ToString();
 
-        //m_levelDeathCounter = 0;
     }
 
     private void DisplayClearedTurns()

@@ -165,7 +165,13 @@ MonoBehaviour:
   m_displayName: 
   m_actionPriority: 0
   DestroyDelay: 0
-  m_lines: []
+  m_lines:
+  - Tag: default
+    Line: Will <color=red>Explode</color> and get destroyed when the timer runs out
+      dealing <color=red>1 Damage</color> inside its AoE range. Upon destruction
+      it creates a <color=red>Fire Field</color>. Any unit caught inside of it will
+      suffer from <color=red>Burning</color> and it will be dealt <color=red>1 Damage</color>
+      at the start of its next turn.
   Range: 1
   m_destroyOnTimer: 1
   m_timer: 2

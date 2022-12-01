@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fa817e0a2ec65884ca28e73613c66f99
+guid: 87fe56409a40ca947b00228db3928aac
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,9 +9,8 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Cyberpunk
-  fallbackFontReferences:
-  - {fileID: 12800000, guid: d98add190070c664584e166892a844d7, type: 3}
+  - Dirtchunk
+  fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

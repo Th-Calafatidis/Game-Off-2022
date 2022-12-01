@@ -4897,7 +4897,7 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: Move the player to the designated tile. Each tile costs
-              one AP to move at.
+              <color=blue>1 AP</color> to move at.
             m_BoolArgument: 0
           m_CallState: 2
         - m_Target: {fileID: 0}
@@ -5059,10 +5059,10 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: Hits all the enemies adjacent to the player and applies
-              <color=blue>3 Knockback</color> pushing them that many tiles to the
-              oposite direction. If they hit an obstacle, wall or another enemy any
-              excess <color=red> Knockback </color> will deal the same amount of
-              <color=red>damage</color> to them.
+              <color=red>3 Knockback</color> pushing them that many tiles to the
+              opposite direction. If they hit an obstacle, wall or another enemy
+              any excess <color=red> Knockback </color> will deal the same amount
+              of <color=red>Damage</color> to them. It costs <color=blue>3 AP</color>.
             m_BoolArgument: 0
           m_CallState: 2
         - m_Target: {fileID: 0}
@@ -5431,8 +5431,9 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Telepot to the target location. If an enemy is in front
-              of the tile chosen the enemy is deal <color=red>1 damage</color>.
+            m_StringArgument: Teleport to the target location. If an enemy is in
+              front of the tile chosen the enemy is deal <color=red>1 Damage</color>.
+              It costs <color=blue>3 AP</color>.
             m_BoolArgument: 0
           m_CallState: 2
         - m_Target: {fileID: 0}
@@ -5593,8 +5594,8 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: A melee attack that hits an adjacent enemy. Deals <color=red>1
-              damage</color> and costs <color=blue>2 AP</color>.
+            m_StringArgument: A melee attack that can target an adjacent enemy. Deals
+              <color=red>1 Damage</color> and costs <color=blue>2 AP</color>.
             m_BoolArgument: 0
           m_CallState: 2
         - m_Target: {fileID: 0}

@@ -709,10 +709,13 @@ MonoBehaviour:
   - Tag: snipe
     Line: During my time working as a government assassin, I was taught how to snipe
       anyone for [red] {num} damage. [/red] As long as I got my eyes on you, I won't
-      miss.
+      miss!
   - Tag: no los
-    Line: I can't seem to find him anywhere. I will just have to wait patiently for
+    Line: I can't seem to find him anywhere! I will just have to wait patiently for
       my moment to strike.
+  - Tag: default
+    Line: All this waiting will make my rifle rusty! I just wish a fool will show
+      up to take a taste of my bullets!
   m_recharge: 0
   m_maxRange: 20
   m_damage: 1

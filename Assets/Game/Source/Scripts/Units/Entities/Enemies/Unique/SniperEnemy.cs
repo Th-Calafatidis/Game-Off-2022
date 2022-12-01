@@ -4,7 +4,9 @@
 // Author: Alex
 // Description: This enemy will try to snipe the player when in line of sight. This is different from other enemies,
 //              as the player
+//
 // Edited: By Theodore on 24/11/2022
+// Added: SFX and Animations, Player Lock Icon mechanic, default ActionLine and other changes.
 // -----------------------
 // ------------------- */
 
@@ -33,6 +35,8 @@ public class SniperEnemy : Enemy
     {
         base.Start();
 
+        SetLine("default");
+
         playerLockIcon = GetPlayer().LockIcon;
 
         if(playerLockIcon.activeSelf)
@@ -42,9 +46,6 @@ public class SniperEnemy : Enemy
     public override void DetermineAction()
     {
         m_actionLocked = false;
-
-        
-
 
         // Ignore unless within range
         if (Grid.Instance.GetDistanceBetweenUnits(this, GetPlayer()) > m_maxRange)

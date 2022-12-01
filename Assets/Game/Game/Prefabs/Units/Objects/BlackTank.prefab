@@ -66,8 +66,11 @@ MonoBehaviour:
   m_physicalMovementSpeed: 0
   m_displayName: 
   m_actionPriority: 0
-  m_destroyDelay: 0.01
-  m_lines: []
+  DestroyDelay: 0
+  m_lines:
+  - Tag: default
+    Line: Deals <color=red>1 Damage</color> to all surrounding tiles upon destruction.
+      Can be pushed.
   Range: 1
   m_destroyOnTimer: 0
   m_timer: 0

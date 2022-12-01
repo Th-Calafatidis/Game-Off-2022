@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d98add190070c664584e166892a844d7
+guid: 54841b769aa3cea46a74d56477167d25
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Cyberpunk
+  - Cyberway Riders
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

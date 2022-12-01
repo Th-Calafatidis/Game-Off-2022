@@ -53,8 +53,13 @@ MonoBehaviour:
   m_physicalMovementSpeed: 0
   m_displayName: 
   m_actionPriority: 0
-  m_destroyDelay: 0.01
-  m_lines: []
+  DestroyDelay: 0
+  m_lines:
+  - Tag: default
+    Line: Creates a <color=green>Toxic Cloud</color> on all surrounding tiles upon
+      destruction. Any unit caught in it will suffer from <color=green>Poison</color>
+      and will be dealt <color=red>1 Damage</color> at the end of its turn. Can be
+      pushed.
   Range: 1
   m_destroyOnTimer: 0
   m_timer: 1

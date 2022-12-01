@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: f7eb9fa38b157984ca1fa77f5cd28e6e, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: 1a51f656d84caa54793c6b076071956c, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -1994,22 +1994,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5215917412384108461, guid: 2c5d7ff2351797540a0612ebbbf17830, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7718091488349924689, guid: 2c5d7ff2351797540a0612ebbbf17830, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7718091488349924689, guid: 2c5d7ff2351797540a0612ebbbf17830, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7718091488349924689, guid: 2c5d7ff2351797540a0612ebbbf17830, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7718091488349924689, guid: 2c5d7ff2351797540a0612ebbbf17830, type: 3}
-      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
