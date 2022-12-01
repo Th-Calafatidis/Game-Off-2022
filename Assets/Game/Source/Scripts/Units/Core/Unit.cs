@@ -41,6 +41,8 @@ public abstract class Unit : MonoBehaviour, IDamagable
         // We need to register this unit into the grid registry once it is created.
         // It is not done in awake, as we need to make sure grid is already initialized.
         Grid.Instance.RegisterUnit(this);
+
+        Debug.Log(this.name);
     }
 
     /// <summary>

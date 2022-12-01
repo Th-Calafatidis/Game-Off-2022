@@ -8,6 +8,14 @@ public class HighlightManager : MonoBehaviour
 
     private bool m_highlightsShown = false;
 
+    private void Start()
+    {
+
+        m_enemyRegistry = new List<Enemy>();
+
+        RegisterEnemies();
+    }
+
     private void Update()
     {
         ShowThreatAreas();

@@ -15,21 +15,22 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 
-public class DestructableObject : Unit, IPushable
+public class DestructableObject : Enemy, IPushable
 {
+    public int Range = 1;
+    
     [Header("Destroy On Timer")]
     [SerializeField] private bool m_destroyOnTimer;
     [SerializeField] private int m_timer;
 
-    [Header("Health")]
-    [SerializeField] private bool m_damagable;
-    [SerializeField] private int m_maxHealth;
-    private Health m_health;
+    //[Header("Health")]
+    //[SerializeField] private bool m_damagable;
+    //[SerializeField] private int m_maxHealth;
+    //private Health m_health;
 
     [Header("Damage")]
     [SerializeField] private bool m_dealDamage;
     [SerializeField] private int m_damageAmount;
-    [SerializeField] private int m_damageRadius;
 
     [Header("Pushing")]
     [SerializeField] private bool m_pushable;
@@ -37,10 +38,13 @@ public class DestructableObject : Unit, IPushable
     [Header("Hazards")]
     [SerializeField] private bool m_createHazard;
     [SerializeField] private Hazard m_hazardType;
-    [SerializeField] private int m_hazardRadius = 1;
     [SerializeField] private int m_hazardDuration;
 
-    public List<GameObject> Highlights { get; private set; }
+    private List<Vector2Int> surroundingTiles;
+
+    private Enemy m_enemy;
+    private GameObject m_timerObject;
+
 
     override public void Awake()
     {
@@ -49,6 +53,12 @@ public class DestructableObject : Unit, IPushable
         // Initialize health
         m_health = new Health(m_maxHealth);
         m_health.OnHealthZero += OnDeath;
+
+        m_enemy = GetComponent<Enemy>();
+        m_timerObject = transform.Find("TimerIcon").gameObject;
+
+        surroundingTiles = Grid.Instance.GetSurroundingTiles(GridPosition, Range);
+        m_enemy.CreateHighlight(surroundingTiles, Color.red);
     }
 
     protected override void Start()
@@ -56,18 +66,16 @@ public class DestructableObject : Unit, IPushable
         base.Start();
 
         if (!m_destroyOnTimer)
+        {
+            m_timerObject.SetActive(false);
             return;
+        }
+            
 
         BattleManager.Instance.OnRoundStart += TimerCopuntdown;
     }
 
-
-    public override void TakeDamage(int damage)
-    {
-        if (!m_damagable) return;
-        m_health.Damage(damage);
-    }
-
+    
     public override void AddStatusEffect(StatusEffect effect)
     {
         // Do nothing, as status effects should not affect this.
@@ -79,15 +87,18 @@ public class DestructableObject : Unit, IPushable
         base.Push(direction, distance);
     }
 
-    public void OnDeath()
+    public override void OnDeath()
     {
+
+        base.OnDeath();
+
         if (m_createHazard)
             CreateHazard();
 
         if (m_dealDamage)
             DealDamage();
 
-        RemoveUnit();
+        m_enemy.ClearHighlights();
 
         BattleManager.Instance.OnRoundStart -= TimerCopuntdown;
     }
@@ -96,7 +107,7 @@ public class DestructableObject : Unit, IPushable
     {
         EnvironmentHazard.CreateHazard(m_hazardType, m_hazardDuration, GridPosition);
 
-        List<Vector2Int> surroundingTiles = Grid.Instance.GetSurroundingTiles(GridPosition, m_hazardRadius);
+        List<Vector2Int> surroundingTiles = Grid.Instance.GetSurroundingTiles(GridPosition, Range);
 
         foreach (Vector2Int tile in surroundingTiles)
         {
@@ -111,7 +122,7 @@ public class DestructableObject : Unit, IPushable
 
     private void DealDamage()
     {
-        List<Vector2Int> targetTiles = Grid.Instance.GetSurroundingTiles(this.GridPosition, m_damageRadius);
+        List<Vector2Int> targetTiles = Grid.Instance.GetSurroundingTiles(this.GridPosition, Range);
 
         foreach (Vector2Int tile in targetTiles)
         {
@@ -129,10 +140,21 @@ public class DestructableObject : Unit, IPushable
     {
         m_timer--;
 
+        m_timerObject.GetComponentInChildren<TMP_Text>().text = m_timer.ToString();
+
         if (m_timer <= 0)
         {
             OnDeath();
         }
     }
 
+    public override void DetermineAction()
+    {
+        
+    }
+
+    public override void DetermineMove()
+    {
+        
+    }
 }

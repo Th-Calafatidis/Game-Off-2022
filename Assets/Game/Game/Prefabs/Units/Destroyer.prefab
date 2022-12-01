@@ -2652,6 +2652,8 @@ MonoBehaviour:
     Line: I might not be able to hit you, but don't think I give up that easily.
       These [green] toxic grenades [/green] are so lethal, that just a single whiff
       is enough to posion anyone. Make sure to take a deep breath.
+  - Tag: default
+    Line: No one will pass. As long i am still standing all intruders will be eliminated!
   m_chargeRange: 3
   m_chargeDamage: 1
   m_chargeSpeed: 15

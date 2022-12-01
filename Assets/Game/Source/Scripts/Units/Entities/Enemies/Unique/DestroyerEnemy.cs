@@ -49,6 +49,8 @@ public class DestroyerEnemy : Enemy
         base.Awake();
 
         m_audioSource = GetComponent<AudioSource>();
+
+        SetLine("default");
     }
     public override void DetermineAction()
     {

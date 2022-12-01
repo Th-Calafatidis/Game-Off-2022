@@ -107,6 +107,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5215917412384108461}
+  - component: {fileID: 31721872}
+  - component: {fileID: 31721871}
   m_Layer: 0
   m_Name: ExplosiveMine
   m_TagString: Untagged
@@ -128,8 +130,50 @@ Transform:
   m_Children:
   - {fileID: 1180993978275668709}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &31721872
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2269374933712311345}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &31721871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2269374933712311345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab6bb5577edd31642ba56d0437d0ca35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_maxHealth: 1
+  m_startingHealth: 0
+  m_movementAmount: 0
+  m_physicalMovementSpeed: 0
+  m_displayName: 
+  m_actionPriority: 0
+  m_destroyDelay: 0
+  m_lines: []
+  Range: 1
+  m_destroyOnTimer: 0
+  m_timer: 0
+  m_dealDamage: 0
+  m_damageAmount: 0
+  m_pushable: 0
+  m_createHazard: 1
+  m_hazardType: 1
+  m_hazardDuration: 0
 --- !u!1 &3331364845145424479
 GameObject:
   m_ObjectHideFlags: 0
