@@ -53,7 +53,7 @@ MonoBehaviour:
   m_physicalMovementSpeed: 0
   m_displayName: 
   m_actionPriority: 0
-  m_destroyDelay: 0
+  m_destroyDelay: 0.01
   m_lines: []
   Range: 1
   m_destroyOnTimer: 0

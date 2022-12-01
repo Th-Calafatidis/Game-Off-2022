@@ -87,10 +87,15 @@ public class SniperEnemy : Enemy
 
     public override void OnDeath()
     {
+        m_actionLocked = false;
+        playerLockIcon.SetActive(false);
+
         base.OnDeath();
 
         Animator.SetTrigger("death");
         PlaySound(m_deathSound);
+
+        
     }
 
 

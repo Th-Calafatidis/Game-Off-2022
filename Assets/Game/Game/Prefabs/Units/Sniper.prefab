@@ -704,7 +704,7 @@ MonoBehaviour:
   m_physicalMovementSpeed: 0
   m_displayName: 
   m_actionPriority: 0
-  m_destroyDelay: 2
+  DestroyDelay: 2
   m_lines:
   - Tag: snipe
     Line: During my time working as a government assassin, I was taught how to snipe

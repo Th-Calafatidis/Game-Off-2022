@@ -2639,7 +2639,7 @@ MonoBehaviour:
   m_physicalMovementSpeed: 5
   m_displayName: 
   m_actionPriority: 1
-  m_destroyDelay: 2
+  DestroyDelay: 2
   m_lines:
   - Tag: charge
     Line: Once I start charging, nothing will be able to stop me. Anyone caught in

@@ -14,11 +14,16 @@ public class AbilityButtonManager : MonoBehaviour
     [SerializeField] private Button m_blinkButton;
     [SerializeField] private Button m_endTurnButton;
 
+    [SerializeField] private Button m_helpButton;
+    [SerializeField] private Button m_quitButton;
+    [SerializeField] private GameObject m_helpPanel;
+
     public Action OnMoveButtonPress;
     public Action OnMeleeButtonPress;
     public Action OnMindBlastButtonPress;
     public Action OnBlinkButtonPress;
     public Action OnEndTurnButtonPress;
+    public Action OnQuitButtonPress;
 
     private void Awake()
     {
@@ -29,6 +34,8 @@ public class AbilityButtonManager : MonoBehaviour
         m_mindBlastButton.onClick.AddListener(() => OnMindBlastButtonPress?.Invoke());
         m_blinkButton.onClick.AddListener(() => OnBlinkButtonPress?.Invoke());
         m_endTurnButton.onClick.AddListener(() => OnEndTurnButtonPress?.Invoke());
+
+        m_quitButton.onClick.AddListener(() => OnQuitButtonPress?.Invoke());
     }
 
     private void Update()
@@ -57,5 +64,19 @@ public class AbilityButtonManager : MonoBehaviour
         {
             OnEndTurnButtonPress?.Invoke();
         }
+    }
+
+    public void ShowHelpPanel()
+    {
+        m_helpPanel.SetActive(true);
+
+        Time.timeScale = 0f;
+    }
+
+    public void HideHelpPanel()
+    {
+        m_helpPanel.SetActive(false);
+
+        Time.timeScale = 1f;
     }
 }

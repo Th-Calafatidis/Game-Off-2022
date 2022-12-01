@@ -32,7 +32,7 @@ public class BattleManager : MonoBehaviour
     // For displaying updates about the battle, we use the announcement text
     private AnnouncementText m_announcement;
 
-    
+
 
     // Events
     public Action OnBattleStart;

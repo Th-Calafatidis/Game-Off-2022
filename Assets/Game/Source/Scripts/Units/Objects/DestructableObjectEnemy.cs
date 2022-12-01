@@ -13,7 +13,7 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 
-public class DestructableObject : Enemy, IPushable
+public class DestructableObjectEnemy : Enemy, IPushable
 {
     public int Range = 1;
     
@@ -50,6 +50,8 @@ public class DestructableObject : Enemy, IPushable
         m_enemy = GetComponent<Enemy>();
         m_timerObject = transform.Find("TimerIcon").gameObject;
         m_timerObject.SetActive(false);
+
+        if (m_enemy.DestroyDelay == 0) m_enemy.DestroyDelay = 0.01f;
     }
 
     protected override void Start()
@@ -95,7 +97,6 @@ public class DestructableObject : Enemy, IPushable
 
     public override void OnDeath()
     {
-
         base.OnDeath();
 
         if (m_createHazard)
@@ -107,6 +108,7 @@ public class DestructableObject : Enemy, IPushable
         m_enemy.ClearHighlights();
 
         BattleManager.Instance.OnRoundStart -= TimerCopuntdown;
+        
     }
 
     private void CreateHazard()

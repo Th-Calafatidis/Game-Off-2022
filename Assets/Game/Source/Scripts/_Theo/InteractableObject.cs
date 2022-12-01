@@ -98,7 +98,7 @@ public class InteractableObject : MonoBehaviour
 
     private void ExplodeTarget(GameObject target)
     {
-        DestructableObject tmp = target.GetComponent<DestructableObject>();
+        DestructableObjectEnemy tmp = target.GetComponent<DestructableObjectEnemy>();
 
         if (tmp == null)
         {

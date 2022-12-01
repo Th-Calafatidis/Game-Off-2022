@@ -57,6 +57,8 @@ public class AudioManager : MonoBehaviour
 
         m_audioScource.loop = true;
 
+        m_audioScource.ignoreListenerPause = true;
+
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             StartCoroutine(PlaySounds(m_audioScource, m_menuSounds));
@@ -74,7 +76,7 @@ public class AudioManager : MonoBehaviour
         // This is not ideal but we know we only have two sound clips so it will work for now.
         source.PlayOneShot(clips[0]);
 
-        yield return new WaitForSeconds(clips[0].length);
+        yield return new WaitForSecondsRealtime(clips[0].length);
 
         source.clip = clips[1];
 

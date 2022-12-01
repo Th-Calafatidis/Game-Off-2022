@@ -18,7 +18,7 @@ public abstract class Enemy : Entity, IPushable
     [Header("Generic")]
     [SerializeField] private string m_displayName;
     [SerializeField] private int m_actionPriority;
-    [SerializeField] private float m_destroyDelay;
+    public float DestroyDelay;
 
     [Header("Lines")]
     [SerializeField] private List<ActionLine> m_lines;
@@ -150,7 +150,7 @@ public abstract class Enemy : Entity, IPushable
     {
         float time = 0f;
 
-        while (time < m_destroyDelay)
+        while (time < DestroyDelay)
         {
             time += Time.deltaTime;
 
