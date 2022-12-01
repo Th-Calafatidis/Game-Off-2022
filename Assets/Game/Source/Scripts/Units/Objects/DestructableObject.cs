@@ -49,6 +49,7 @@ public class DestructableObject : Enemy, IPushable
 
         m_enemy = GetComponent<Enemy>();
         m_timerObject = transform.Find("TimerIcon").gameObject;
+        m_timerObject.SetActive(false);
     }
 
     protected override void Start()
@@ -56,16 +57,27 @@ public class DestructableObject : Enemy, IPushable
         base.Start();
 
         surroundingTiles = Grid.Instance.GetSurroundingTiles(GridPosition, Range);
-        m_enemy.CreateHighlight(surroundingTiles, Color.red);
 
-        if (!m_destroyOnTimer)
+        List<Vector2Int> highlights = new List<Vector2Int>();
+
+        foreach (Vector2Int tile in surroundingTiles)
         {
-            m_timerObject.SetActive(false);
-            return;
-        }
-            
+            highlights.Add(tile);
 
-        BattleManager.Instance.OnRoundStart += TimerCopuntdown;
+            if (!Grid.Instance.IsInBounds(tile) || (Grid.Instance.GetNodeAt(tile.x, tile.y).IsObstructed && !Grid.Instance.GetUnitAt(tile)))
+            {
+                highlights.Remove(tile);
+            }
+        }
+
+        m_enemy.CreateHighlight(highlights, Color.red);
+
+        if (m_destroyOnTimer)
+        {
+            m_timerObject.SetActive(true);
+            BattleManager.Instance.OnRoundStart += TimerCopuntdown;
+        }
+                    
     }
 
     
@@ -104,13 +116,30 @@ public class DestructableObject : Enemy, IPushable
 
         foreach (Vector2Int tile in surroundingTiles)
         {
+            var unit = Grid.Instance.GetUnitAt(tile);
+
             var node = Grid.Instance.GetNodeAt(tile.x, tile.y);
 
             if (node.IsObstructed)
-                return;
+            {
+                if (unit != null) node.IsObstructed = false;
+            }
 
-            EnvironmentHazard.CreateHazard(m_hazardType, m_hazardDuration, tile);
+            if (!node.IsObstructed)
+            {
+                EnvironmentHazard.CreateHazard(m_hazardType, m_hazardDuration, tile);
+            }
         }
+
+        //foreach (Vector2Int tile in surroundingTiles)
+        //{
+        //    if (Grid.Instance.IsReachable(GridPosition, tile))
+        //    {
+        //        EnvironmentHazard.CreateHazard(m_hazardType, m_hazardDuration, tile);
+        //    }
+
+
+        //}
     }
 
     private void DealDamage()

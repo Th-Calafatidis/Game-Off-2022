@@ -562,7 +562,7 @@ public class Grid : MonoBehaviour
     /// </summary>
     /// <param name="position">The position to check</param>
     /// <returns></returns>
-    private bool IsInBounds(Vector2Int position)
+    public bool IsInBounds(Vector2Int position)
     {
         return position.x >= 0 && position.x < m_navmesh.Width && position.y >= 0 && position.y < m_navmesh.Height;
     }

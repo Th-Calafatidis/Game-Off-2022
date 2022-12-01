@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5781498513929220253}
   - component: {fileID: 5781498513929220252}
+  - component: {fileID: 4899875525841546658}
   m_Layer: 0
   m_Name: BattleManager
   m_TagString: Untagged
@@ -44,5 +45,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c06b6c77ca29db8489fa8fbd4c3375b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_winSound: {fileID: 8300000, guid: cf4e98c49c915dc4eac9a3665076f2d9, type: 3}
-  m_lossSound: {fileID: 8300000, guid: 8a1ae817322fa08418015a6537f03747, type: 3}
+--- !u!114 &4899875525841546658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5781498513929220254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf5c6f87ce1a7545ae0cb9dd61f292d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

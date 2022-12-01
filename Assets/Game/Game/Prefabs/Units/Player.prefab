@@ -4968,7 +4968,7 @@ MonoBehaviour:
   m_width: 0.15
   m_validColor: {r: 0, g: 1, b: 0.19265246, a: 0.5882353}
   m_invalidColor: {r: 1, g: 0, b: 0, a: 0.5882353}
-  m_lockIcon: {fileID: 539934008526325146}
+  LockIcon: {fileID: 539934008526325146}
 --- !u!65 &139447598987904627
 BoxCollider:
   m_ObjectHideFlags: 0
