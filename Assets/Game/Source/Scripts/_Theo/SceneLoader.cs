@@ -57,30 +57,29 @@ public class SceneLoader : MonoBehaviour
             }
             else
             {
-                OnSceneLoaded?.Invoke();
-
 
                 m_levelFinished = true;
                 m_announcement.Announce("Level Complete", 4f);
                 m_announcement.AnnounceStageCleared(4f);
 
+                
                 OnStageCleared?.Invoke();
 
                 m_audioSource.Stop();
                 m_audioSource.clip = null;
                 m_audioSource.PlayOneShot(AudioManager.Instance.WinSound);
                 this.Invoke(Utility.LoadNextScene, 4f);
+                
             }
-            
+
 
         }
 
         else if (m_player.Health.CurrentHealth <= 0 && !m_levelFinished)
         {
-            OnSceneRestarted?.Invoke();
-            OnSceneLoaded?.Invoke();
 
             m_levelFinished = true;
+            TotalCounterData.Instance.TotalDeaths++;
             m_announcement.Announce("You Died", 4f);
             m_audioSource.Stop();
             m_audioSource.clip = null;

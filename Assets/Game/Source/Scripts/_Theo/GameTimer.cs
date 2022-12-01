@@ -32,7 +32,7 @@ public class GameTimer : MonoBehaviour
     private float m_levelTimer;
     private float m_levelTimerCounter;
     private int m_turnCounter = 0;
-    private int m_levelDeathCounter = 0;
+    private int m_levelDeathCounter ;
 
     private GameObject m_finalScreen;
     private GameObject m_stageCleared;
@@ -41,35 +41,21 @@ public class GameTimer : MonoBehaviour
 
     private static GameTimer m_instance;
 
-    private void PersistentSingleton()
-    {
-        if (m_instance != null)
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    private void Awake()
-    {
-        PersistentSingleton();
-
-        m_instance = this;
-
-        DontDestroyOnLoad(gameObject);
-    }
-
     private void Start()
     {
+
         BattleManager.Instance.OnRoundStart += TurnCounterUpdate;
+
         SceneLoader.Instance.OnSceneLoaded += ResetCounters;
+        SceneLoader.Instance.OnSceneLoaded += ResetOnCleared;
+
         SceneLoader.Instance.OnSceneRestarted += DeathCounterUpdate;
 
-        SceneLoader.Instance.OnStageCleared += ResetOnCleared;
         SceneLoader.Instance.OnStageCleared += DisplayClearedTimer;
         SceneLoader.Instance.OnStageCleared += DisplayClearedDeaths;
         SceneLoader.Instance.OnStageCleared += DisplayClearedTurns;
 
-        SceneLoader.Instance.OnGameFinished += FinalScreenDisplay;                
+        SceneLoader.Instance.OnGameFinished += FinalScreenDisplay;
 
         m_timerText = GameObject.Find("TimeCounter").GetComponentInChildren<TMP_Text>();
         m_turnText = GameObject.Find("TurnCounter").GetComponentInChildren<TMP_Text>();
@@ -89,21 +75,26 @@ public class GameTimer : MonoBehaviour
         m_finalScreen.SetActive(false);
 
         m_levelFinished = false;
+
+        Debug.Log("Total Game Time: " + TotalCounterData.Instance.TotalTime);
+        Debug.Log("Total Turns: " + TotalCounterData.Instance.TotalTurns);
+        Debug.Log("Total Deaths: " + TotalCounterData.Instance.TotalDeaths);
     }
 
     private void Update()
     {
-
-        TimeCounterUpdate();
+        if (!m_stageCleared.activeSelf)
+        {
+            TimeCounterUpdate();
+        }
+        
         DisplayTimer();
         DisplayTurnCount();
     }
 
     private void ResetCounters()
     {
-        Debug.Log("Total Game Time: " + m_totalGameTime);
-        Debug.Log("Total Turns: " + m_totalTurns);
-        Debug.Log("Total Deaths: " + m_totalDeaths);
+        
 
         m_totalGameTime += m_levelTimerCounter;
 
@@ -113,13 +104,12 @@ public class GameTimer : MonoBehaviour
 
         m_levelFinished = false;
 
-        m_timerText = GameObject.Find("TimeCounter").GetComponentInChildren<TMP_Text>();
-        m_turnText = GameObject.Find("TurnCounter").GetComponentInChildren<TMP_Text>();
+
     }
 
     private void ResetOnCleared()
     {
-        m_levelDeathCounter = 0;
+        
         m_turnCounter = 0;
         m_levelTimer = 0;
         m_levelTimerCounter = 0;
@@ -141,7 +131,7 @@ public class GameTimer : MonoBehaviour
 
     private void DeathCounterUpdate()
     {
-        m_levelDeathCounter++;
+        m_levelDeathCounter ++ ;
     }
 
     #endregion
@@ -167,21 +157,23 @@ public class GameTimer : MonoBehaviour
     {
         m_levelTimer = m_levelTimerCounter;
 
-        m_totalGameTime += m_levelTimer;
+        TotalCounterData.Instance.TotalTime += m_levelTimer;
 
         m_stageClearTimer.text = "TIME: " + TimeSpan.FromSeconds(m_levelTimerCounter).ToString("mm\\:ss\\:f");
     }
 
     private void DisplayClearedDeaths()
     {
-        m_totalDeaths += m_levelDeathCounter;
+        TotalCounterData.Instance.TotalDeaths += m_levelDeathCounter;
 
         m_deathClearCounter.text = "DEATHS: " + m_levelDeathCounter.ToString();
+
+        m_levelDeathCounter = 0;
     }
 
     private void DisplayClearedTurns()
     {
-        m_totalTurns += m_turnCounter;
+        TotalCounterData.Instance.TotalTurns += m_turnCounter;
 
         m_turnClearCounter.text = "TURNS: " + m_turnCounter.ToString();
     }
@@ -201,17 +193,17 @@ public class GameTimer : MonoBehaviour
 
     private void DisplayTimerTotal()
     {
-        m_totalTimeText.text = "TIME: " + TimeSpan.FromSeconds(m_totalGameTime).ToString("mm\\:ss\\:f");
+        m_totalTimeText.text = "TIME: " + TimeSpan.FromSeconds(TotalCounterData.Instance.TotalTime).ToString("mm\\:ss\\:f");
     }
 
     private void DisplayDeathTotal()
     {
-        m_totalDeathText.text = "DEATHS: " + m_totalDeaths.ToString();
+        m_totalDeathText.text = "DEATHS: " + TotalCounterData.Instance.TotalDeaths.ToString();
     }
 
     private void DisplayTurnTotal()
     {
-        m_totalTurnsText.text = "TURNS: " + m_totalTurns.ToString();
+        m_totalTurnsText.text = "TURNS: " + TotalCounterData.Instance.TotalTurns.ToString();
     }
 
 

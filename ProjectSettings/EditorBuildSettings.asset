@@ -9,12 +9,21 @@ EditorBuildSettings:
     path: Assets/Game/Game/Scenes/Main Menu/Main Menu.unity
     guid: 84c270a2952951544bbd39559fbfd401
   - enabled: 1
-    path: Assets/Game/Game/Scenes/Testing/Level1 - Blockout.unity
-    guid: 1517ee0d368a1fd48b14ac9682597c16
+    path: Assets/Game/Game/Scenes/Levels/Level 1.unity
+    guid: 3a39229f57ef2cb4684ef8c355dc7f9b
   - enabled: 1
-    path: Assets/Game/Game/Scenes/Testing/plzworkscene.unity
-    guid: 477b4e592e726094e819a50f8281cfac
+    path: Assets/Game/Game/Scenes/Levels/Level 2.unity
+    guid: 68d418a5caf32cb48a8ce83ac1eb1ebd
   - enabled: 1
-    path: Assets/Game/Game/Scenes/Testing/Level2 - Blockout.unity
-    guid: ea52740bc07cacb4a956cb2bd4184e13
+    path: Assets/Game/Game/Scenes/Levels/Level 3.unity
+    guid: 5edd0081b73020a47ab5c0aa77dcf375
+  - enabled: 1
+    path: Assets/Game/Game/Scenes/Levels/Level 4.unity
+    guid: ac82bb5086640ac44881f4e006b2398f
+  - enabled: 1
+    path: Assets/Game/Game/Scenes/Levels/Level 5.unity
+    guid: 47e40d24c166f534fb2ed46c5bae26f2
+  - enabled: 1
+    path: Assets/Game/Game/Scenes/Levels/Level 6.unity
+    guid: a36946925481f394d8dec22ed100ba77
   m_configObjects: {}

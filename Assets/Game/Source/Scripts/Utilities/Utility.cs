@@ -19,6 +19,8 @@ public static class Utility
     public static void LoadNextScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+        SceneLoader.Instance.OnSceneLoaded?.Invoke();
     }
 
     /// <summary>
@@ -27,6 +29,9 @@ public static class Utility
     public static void RestartScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        SceneLoader.Instance.OnSceneRestarted?.Invoke();
+        SceneLoader.Instance.OnSceneLoaded?.Invoke();
     }
 
     /// <summary>
