@@ -4929,7 +4929,7 @@ ParticleSystemRenderer:
   m_MaskInteraction: 0
 --- !u!114 &6559168832299083928
 MonoBehaviour:
-  m_ObjectHideFlags: 16
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -4939,7 +4939,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03c8102322ad0d04fa6ae3f17887e967, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDynamic: 0
+  isDynamic: 1
   text: BANG!!
   size: 0.25
   letterSpacing: 0.35
