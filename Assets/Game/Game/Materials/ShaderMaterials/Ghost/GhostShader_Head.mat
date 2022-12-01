@@ -27,11 +27,13 @@ Material:
     m_Floats:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
-    - _FrenelPower: 10
+    - _FrenelPower: 1.65
     - _InteriorSpread: 0.85
     m_Colors:
     - _FresnelColor: {r: 0.2955894, g: 0, b: 2, a: 0.3921569}
     - _InteriorColor: {r: 0.2627451, g: 0, b: 0.15406647, a: 1}
+    - _InteriorPosition: {r: 0, g: 0, b: 0, a: 0}
+    - _ViewDirection: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1215540042074913001
 MonoBehaviour:
