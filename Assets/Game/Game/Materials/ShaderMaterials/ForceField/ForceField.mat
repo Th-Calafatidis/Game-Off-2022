@@ -32,8 +32,8 @@ Material:
     - _BUILTIN_QueueControl: 1
     - _BUILTIN_QueueOffset: 0
     - _Fill: 0.01
-    - _FresnelPower: 2.18
-    - _Offset: 0.61
+    - _FresnelPower: 2.14
+    - _Offset: 0.54
     - _ScrollSpeed: 0.05
     m_Colors:
     - _Emission: {r: 6.796663, g: 0.81568646, b: 11.984314, a: 0}

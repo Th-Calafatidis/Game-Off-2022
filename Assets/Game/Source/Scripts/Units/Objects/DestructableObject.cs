@@ -49,14 +49,14 @@ public class DestructableObject : Enemy, IPushable
 
         m_enemy = GetComponent<Enemy>();
         m_timerObject = transform.Find("TimerIcon").gameObject;
-
-        surroundingTiles = Grid.Instance.GetSurroundingTiles(GridPosition, Range);
-        m_enemy.CreateHighlight(surroundingTiles, Color.red);
     }
 
     protected override void Start()
     {
         base.Start();
+
+        surroundingTiles = Grid.Instance.GetSurroundingTiles(GridPosition, Range);
+        m_enemy.CreateHighlight(surroundingTiles, Color.red);
 
         if (!m_destroyOnTimer)
         {

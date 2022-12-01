@@ -33,7 +33,9 @@ public class SniperEnemy : Enemy
     {
         base.Start();
 
-        playerLockIcon = GameObject.Find("LockIcon");
+        playerLockIcon = GetPlayer().LockIcon;
+
+        if(playerLockIcon.activeSelf)
         playerLockIcon.SetActive(false);
     }
 

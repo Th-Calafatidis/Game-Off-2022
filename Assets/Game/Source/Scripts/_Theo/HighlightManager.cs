@@ -50,6 +50,7 @@ public class HighlightManager : MonoBehaviour
 
                 foreach (Enemy enemy in m_enemyRegistry)
                 {
+                    if(enemy.Highlights != null && enemy.Highlights.Count != 0)
                     enemy.ShowHighlights();
                 }
 
@@ -61,7 +62,8 @@ public class HighlightManager : MonoBehaviour
         {
             foreach (Enemy enemy in m_enemyRegistry)
             {
-                enemy.HideHighlights();
+                if (enemy.Highlights != null && enemy.Highlights.Count != 0)
+                    enemy.HideHighlights();
             }
         }
 

@@ -46,13 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf5571cd229d51445b667d699c0bb471, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_allowRotation: 0
+  m_allowRotation: 1
   m_focalPoint: {fileID: 0}
   m_sensitivity: 1.5
   m_zoomSpeed: 200
   m_zoomLerp: 0.2
   m_moveSpeed: 3.5
-  m_lerpSpeed: 0.2
 --- !u!1 &7681941741813135302
 GameObject:
   m_ObjectHideFlags: 0

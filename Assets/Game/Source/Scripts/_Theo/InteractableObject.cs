@@ -136,6 +136,8 @@ public class InteractableObject : MonoBehaviour
 
         if (unit != null) unit.RemoveUnit();
 
+        else Destroy(target.gameObject);
+
         Grid.Instance.BakeNavMesh();
     }
 }

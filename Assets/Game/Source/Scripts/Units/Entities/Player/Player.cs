@@ -83,7 +83,7 @@ public class Player : Entity, IDamagable
         get { return m_movementAmount; }
     }
 
-    private GameObject m_lockIcon;
+    public GameObject LockIcon;
 
     public override void Awake()
     {
@@ -108,8 +108,7 @@ public class Player : Entity, IDamagable
         m_moveSelecting = false;
         m_abilitySelecting = false;
 
-        m_lockIcon = transform.Find("LockIcon").gameObject;
-        m_lockIcon.SetActive(false);
+        LockIcon.SetActive(false);
     }
 
     public override void TakeDamage(int damage)

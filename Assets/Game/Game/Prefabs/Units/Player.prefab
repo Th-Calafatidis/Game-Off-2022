@@ -4968,6 +4968,7 @@ MonoBehaviour:
   m_width: 0.15
   m_validColor: {r: 0, g: 1, b: 0.19265246, a: 0.5882353}
   m_invalidColor: {r: 1, g: 0, b: 0, a: 0.5882353}
+  m_lockIcon: {fileID: 539934008526325146}
 --- !u!65 &139447598987904627
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9958,6 +9959,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f514aac984212b4493ee632202513b6, type: 3}
+--- !u!1 &539934008526325146 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 473249341080441412, guid: 2f514aac984212b4493ee632202513b6, type: 3}
+  m_PrefabInstance: {fileID: 139447598226659294}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &3407742393943726264 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3361323031436382054, guid: 2f514aac984212b4493ee632202513b6, type: 3}
